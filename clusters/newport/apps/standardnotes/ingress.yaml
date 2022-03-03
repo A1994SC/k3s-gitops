@@ -7,7 +7,7 @@ metadata:
     # set ingress controller
     ingressClassName: "traefik"
     # default settings for traefik
-    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    # traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/service.passhostheader: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -37,7 +37,6 @@ spec:
             name: sn-api
             port:
               name: web
-#              number: 80
         path: /v1
         pathType: Prefix
       - backend:

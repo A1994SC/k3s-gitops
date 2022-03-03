@@ -39,12 +39,6 @@ spec:
               name: sn-default-env
           - secretRef:
               name: sn-secret
-#        livenessProbe:
-#          httpGet:
-#            path: /healthcheck
-#            port: 3000
-#          initialDelaySeconds: 10
-#          periodSeconds: 15
         resources:
           limits:
             cpu: "100m"
@@ -97,12 +91,6 @@ spec:
               name: sn-auth-env
           - secretRef:
               name: sn-secret
-#        livenessProbe:
-#          httpGet:
-#            path: /healthcheck
-#            port: 3000
-#          initialDelaySeconds: 10
-#          periodSeconds: 15
         resources:
           limits:
             cpu: "100m"
