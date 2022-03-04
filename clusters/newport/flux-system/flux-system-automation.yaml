@@ -31,7 +31,7 @@ spec:
         Images:
         {{ range .Updated.Images -}}
         - {{.}}
-        {{ end -}} 
+        {{ end -}}
     push:
       branch: main
   interval: 1m0s
