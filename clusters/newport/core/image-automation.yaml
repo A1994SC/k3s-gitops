@@ -11,8 +11,8 @@ spec:
         branch: main
     commit:
       author:
-        email: fluxcdbot@users.noreply.github.com
-        name: fluxcdbot
+        email: bot@conlon.dev
+        name: ascii17bot
       messageTemplate: |
         Automated image update
 
@@ -32,6 +32,9 @@ spec:
         {{ range .Updated.Images -}}
         - {{.}}
         {{ end -}}
+      signingKey:
+        secretRef:
+          name: git-pgp
     push:
       branch: main
   interval: 1m0s
