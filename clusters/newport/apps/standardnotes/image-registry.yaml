@@ -3,7 +3,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
   name: sn-sync
-  namespace: flux-system
+  namespace: apps
 spec:
   image: standardnotes/syncing-server-js
   interval: 1m0s
@@ -12,7 +12,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
   name: sn-api
-  namespace: flux-system
+  namespace: apps
 spec:
   image: standardnotes/api-gateway
   interval: 1m0s
@@ -21,7 +21,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
   name: sn-auth
-  namespace: flux-system
+  namespace: apps
 spec:
   image: standardnotes/auth
   interval: 1m0s
