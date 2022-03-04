@@ -28,7 +28,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-sync-worker
-        image: standardnotes/syncing-server-js
+        image: standardnotes/syncing-server-js:1.48.2
         imagePullPolicy: Always
         command:
           - ./docker/entrypoint.sh
@@ -78,7 +78,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-auth-worker
-        image: standardnotes/auth
+        image: standardnotes/auth:1.38.1
         imagePullPolicy: Always
         command:
           - ./docker/entrypoint.sh

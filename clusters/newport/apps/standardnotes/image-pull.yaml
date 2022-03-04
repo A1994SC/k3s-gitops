@@ -1,0 +1,36 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-sync
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-sync
+  policy:
+    semver:
+      range: 1.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-api
+  policy:
+    semver:
+      range: 1.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-auth
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-auth
+  policy:
+    semver:
+      range: 1.x
