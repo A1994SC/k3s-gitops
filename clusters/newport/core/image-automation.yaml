@@ -12,7 +12,7 @@ spec:
     commit:
       author:
         email: bot@conlon.dev
-        name: ascii17bot
+        name: ASCii Bot
       messageTemplate: |
         Automated image update
 
