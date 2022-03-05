@@ -1,0 +1,43 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: metallb-speaker
+  namespace: flux-system
+spec:
+  image: quay.io/metallb/speaker
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: metallb-speaker
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: metallb-speaker
+  policy:
+    semver:
+      range: v0.x
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: metallb-controller
+  namespace: flux-system
+spec:
+  image: quay.io/metallb/controller
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: metallb-controller
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: metallb-controller
+  policy:
+    semver:
+      range: v0.x
