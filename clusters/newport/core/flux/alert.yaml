@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   providerRef:
-    name: dsiscord
+    name: discord
   eventSeverity: info
   eventSources:
     - kind: GitRepository
