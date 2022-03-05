@@ -61,7 +61,7 @@ spec:
     redisCluster:
       clusterSize: 3
       image: quay.io/opstree/redis # {"$imagepolicy": "flux-system:redis:name"}
-      tag: quay.io/opstree/redis # {"$imagepolicy": "flux-system:redis:name"}
+      tag: v6.2.5 # {"$imagepolicy": "flux-system:redis:tag"}
       imagePullPolicy: IfNotPresent
       redisSecret:
         secretName: redis-secret
