@@ -67,14 +67,12 @@ spec:
         secretName: redis-secret
         secretKey: password
       leader:
-        replicas: 3
         serviceType: ClusterIP
         affinity: {}
       follower:
-        replicas: 0
         serviceType: ClusterIP
         affinity: {}
-      resources:
+      resources: 
         requests:
           cpu: 100m
           memory: 128Mi
@@ -106,3 +104,4 @@ spec:
               storage: 1Gi
     securityContext: {}
     affinity: {}
+
