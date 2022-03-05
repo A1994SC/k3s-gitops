@@ -16,7 +16,7 @@ data:
           fallthrough in-addr.arpa ip6.arpa
         }
         prometheus :9153
-        forward . 10.2.1.5 {
+        forward . 1.1.1.1 {
           max_concurrent 1000
         }
         cache 30
