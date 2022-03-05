@@ -1,0 +1,116 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: ot-helm
+  namespace: redis
+spec:
+  interval: 60m0s
+  url: https://ot-container-kit.github.io/helm-charts/
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis-operator  
+  namespace: redis
+spec:
+  chart:
+    spec:
+      chart: redis-operator
+      sourceRef:
+        kind: HelmRepository
+        name: ot-helm
+  interval: 60m0s
+  values:
+    redisOperator:
+      name: redis-operator
+      imageName: quay.io/opstree/redis-operator # {"$imagepolicy": "flux-system:redis-operator:name"}
+      imageTag: v0.10.0 # {"$imagepolicy": "flux-system:redis-operator:tag"}
+      imagePullPolicy: Always
+      podAnnotations: {}
+      podLabels: {}
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+    replicas: 1
+    serviceAccountName: redis-operator
+    priorityClassName: ""
+    nodeSelector: {}
+    tolerateAllTaints: false
+    tolerations: []
+    affinity: {}
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis-cluster
+  namespace: redis
+spec:
+  chart:
+    spec:
+      chart: redis-cluster
+      sourceRef:
+        kind: HelmRepository
+        name: ot-helm
+  interval: 60m0s
+  values:
+    redisCluster:
+      clusterSize: 3
+      image: quay.io/opstree/redis # {"$imagepolicy": "flux-system:redis:name"}
+      tag: v6.2.5 # {"$imagepolicy": "flux-system:redis:name"}
+      imagePullPolicy: IfNotPresent
+      redisSecret:
+        secretName: redis-secret
+        secretKey: password
+      leader:
+        replicas: 3
+        serviceType: ClusterIP
+        affinity: {}
+      follower:
+        replicas: 0
+        serviceType: ClusterIP
+        affinity: {}
+      resources: 
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 1000m
+          memory: 1024Mi
+
+    externalService:
+      enabled: false
+      serviceType: LoadBalancer
+      port: 6379
+
+    serviceMonitor:
+      enabled: false
+      interval: 30s
+      scrapeTimeout: 10s
+      namespace: monitoring
+
+    redisExporter:
+      enabled: true
+      image: quay.io/opstree/redis-exporter
+      tag: "1.0"
+      imagePullPolicy: IfNotPresent
+      resources: {}
+
+    nodeSelector: {}
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+
+    securityContext: {}
+    affinity: {}

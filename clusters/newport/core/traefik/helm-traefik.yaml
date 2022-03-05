@@ -4,7 +4,7 @@ metadata:
   name: traefik
   namespace: ingress
 spec:
-  interval: 1m0s
+  interval: 60m0s
   url: https://helm.traefik.io/traefik
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: traefik
-  interval: 1m0s
+  interval: 60m0s
   values:
     image:
       name: traefik # {"$imagepolicy": "flux-system:traefik:name"}

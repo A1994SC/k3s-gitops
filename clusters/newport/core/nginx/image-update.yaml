@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   image: nginx/nginx-ingress
-  interval: 1m0s
+  interval: 60m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy

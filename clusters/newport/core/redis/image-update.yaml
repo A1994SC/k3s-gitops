@@ -40,4 +40,4 @@ spec:
     name: redis
   policy:
     semver:
-      range: v0.x
+      range: v6.x

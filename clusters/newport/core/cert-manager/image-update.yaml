@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   image: quay.io/jetstack/cert-manager-controller
-  interval: 1m0s
+  interval: 60m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
@@ -27,7 +27,7 @@ metadata:
   namespace: flux-system
 spec:
   image: quay.io/jetstack/cert-manager-webhook
-  interval: 1m0s
+  interval: 60m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
@@ -48,7 +48,7 @@ metadata:
   namespace: flux-system
 spec:
   image: quay.io/jetstack/cert-manager-cainjector
-  interval: 1m0s
+  interval: 60m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
