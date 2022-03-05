@@ -84,6 +84,6 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       image:
-        repository: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:name"}
+        repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:name"}
         tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
         pullPolicy: Always
