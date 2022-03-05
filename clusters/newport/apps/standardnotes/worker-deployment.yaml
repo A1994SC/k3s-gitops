@@ -27,7 +27,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-sync-worker
-        image: standardnotes/syncing-server-js:1.48.3 # {"$imagepolicy": "flux-system:sn-sync"}
+        image: standardnotes/syncing-server-js:1.48.0 # {"$imagepolicy": "flux-system:sn-sync"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
@@ -77,7 +77,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-auth-worker
-        image: standardnotes/auth:1.38.3 # {"$imagepolicy": "flux-system:sn-auth"}
+        image: standardnotes/auth:1.38.0 # {"$imagepolicy": "flux-system:sn-auth"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
