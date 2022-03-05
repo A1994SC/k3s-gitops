@@ -1,0 +1,63 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: cert-manager-controller
+  namespace: flux-system
+spec:
+  image: quay.io/jetstack/cert-manager-controller
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: cert-manager-controller
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cert-manager-controller
+  policy:
+    semver:
+      range: v1.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: cert-manager-webhook
+  namespace: flux-system
+spec:
+  image: quay.io/jetstack/cert-manager-webhook
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: cert-manager-webhook
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cert-manager-webhook
+  policy:
+    semver:
+      range: v1.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: cert-manager-cainjector
+  namespace: flux-system
+spec:
+  image: quay.io/jetstack/cert-manager-cainjector
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: cert-manager-cainjector
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cert-manager-cainjector
+  policy:
+    semver:
+      range: v1.x
