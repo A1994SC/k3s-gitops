@@ -1,4 +1,3 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -7,7 +6,6 @@ metadata:
 spec:
   interval: 1m0s
   url: https://kubernetes-sigs.github.io/metrics-server/
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -25,30 +23,23 @@ spec:
   values:
     image:
       repository: k8s.gcr.io/metrics-server/metrics-server # {"$imagepolicy": "flux-system:metrics-server:name"}
-      tag: "v0.5.2" # {"$imagepolicy": "flux-system:metrics-server:tag"}
+      tag: "v0.6.1" # {"$imagepolicy": "flux-system:metrics-server:tag"}
       pullPolicy: IfNotPresent
-
     imagePullSecrets: []
-
     nameOverride: ""
     fullnameOverride: ""
-
     serviceAccount:
       create: true
       annotations: {}
       name: ""
-
     rbac:
       create: true
       pspEnabled: false
-
     apiService:
       create: true
-
     replicas: 3
-
     defaultArgs:
-      - --cert-dir=/tmp
-      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-      - --kubelet-use-node-status-port
-      - --metric-resolution=15s
+    - --cert-dir=/tmp
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+    - --kubelet-use-node-status-port
+    - --metric-resolution=15s
