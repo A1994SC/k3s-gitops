@@ -28,7 +28,7 @@ spec:
     deployment:
       enabled: true
       kind: Deployment
-      replicas: 1
+      replicas: 3
       terminationGracePeriodSeconds: 60
     ingressClass:
       enabled: true

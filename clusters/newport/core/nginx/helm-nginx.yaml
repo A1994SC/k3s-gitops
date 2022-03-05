@@ -1,0 +1,105 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: nginx-ingress
+  namespace: ingress
+spec:
+  interval: 1m0s
+  url: https://helm.nginx.com/stable
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx-ingress  
+  namespace: ingress
+spec:
+  chart:
+    spec:
+      chart: nginx-ingress
+      sourceRef:
+        kind: HelmRepository
+        name: nginx-ingress
+  interval: 1m0s
+  values:
+    controller:
+      name: nginx
+      #kind: daemonset
+      kind: deployment
+      nginxReloadTimeout: 60000
+      logLevel: 1
+
+      image:
+        repository: nginx/nginx-ingress # {"$imagepolicy": "flux-system:nginx:name"}
+        tag: "2.1.0" # {"$imagepolicy": "flux-system:nginx:tag"}
+        pullPolicy: IfNotPresent
+
+      
+      defaultTLS:
+        secret: ingress/nginx-tls
+
+      wildcardTLS:
+        secret: ingress/nginx-tls-wild
+
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+
+      resources: {}
+        # limits:
+        #   cpu: 100m
+        #   memory: 64Mi
+        # requests:
+        #   cpu: 100m
+        #   memory: 64Mi
+
+      replicaCount: 3
+
+      ingressClass: "nginx"
+      setAsDefaultIngress: false
+      enableCustomResources: true
+      healthStatus: false
+
+      ## Sets the URI of health status location in the default server. Requires controller.healthStatus.
+      healthStatusURI: "/nginx-health"
+
+      nginxStatus:
+        enable: true
+        port: 8080
+        allowCidrs: "127.0.0.1"
+
+      service:
+        create: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        annotations: {}
+        extraLabels: {}
+        loadBalancerIP: "10.2.25.151"
+        httpPort:
+          enable: true
+          port: 80
+          nodePort: ""
+          targetPort: 80
+
+        httpsPort:
+          enable: true
+          port: 443
+          nodePort: ""
+          targetPort: 443
+
+        customPorts: []
+
+      serviceAccount:
+        # name: nginx-ingress
+        imagePullSecretName: ""
+
+      reportIngressStatus:
+        enable: true
+    rbac:
+      create: true
+
+    prometheus:
+      create: true
+      port: 9113
+      secret: ""
+      scheme: http
