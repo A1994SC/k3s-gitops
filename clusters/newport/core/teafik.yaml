@@ -25,7 +25,7 @@ spec:
   values:
     image:
       name: traefik
-      tag: "2.6.0" # {"$imagepolicy": "flux-system:treafik"}
+      tag: "2.6.0" # {"$imagepolicy": "flux-system:treafik:tag"}
       pullPolicy: IfNotPresent
 
     deployment:
