@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cloudflared
+  namespace: ingress
+  labels:
+    group: cloudflare
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared
+  template:
+    metadata:
+      labels:
+        app: cloudflared
+        group: cloudflare
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "kubernetes.io/arch"
+                operator: In
+                values: ["amd64"]
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      containers:
+      - name: cloudflared
+        image: cloudflare/cloudflared:2021.1.0 # {"$imagepolicy": "flux-system:cloudflare"}
+        args:
+        - tunnel
+        # Points cloudflared to the config file, which configures what
+        # cloudflared will actually do. This file is created by a ConfigMap
+        # below.
+        - --config
+        - /etc/cloudflared/config/config.yaml
+        - --protocol
+        - http2
+        - run
+        volumeMounts:
+        - name: config
+          mountPath: /etc/cloudflared/config
+          readOnly: true
+        - name: creds
+          mountPath: /etc/cloudflared/creds
+          readOnly: true
+        - name: cert
+          mountPath: /etc/cloudflared
+          readOnly: true
+      volumes:
+      - name: creds
+        secret:
+          # kubectl -n ingress create secret generic tunnel-credentials --from-file=credentials.json=/home/ascii/.cloudflared/<tunnel ID>.json
+          secretName: tunnel-credentials
+      - name: config
+        configMap:
+          name: cloudflared
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: cert
+        secret:
+          secretName: tunnel-pem

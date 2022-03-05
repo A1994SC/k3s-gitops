@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tunnel-credentials
+    namespace: ingress
+type: Opaque
+stringData:
+    credentials.json: ENC[AES256_GCM,data:gpykwM4f1shnDT+cuGnBL2A2+6MFPIezjNm8LygAz+9lWCrHsa+SQaeT7Te8p39WA72OqXbNUzfyBDB4pBtbDBWwPgDAzgXLop5o4g6qfuMKeOu879Alynog0avl4vcImzsZpUreiOQZXsy6QcvDsLjH0FX55jBxxIaHGiNWuUHOCRBaiLKalQnUl0N6U2KHhHq58IQo46YblvE/MVP3HjrMxh+BFL7xpG9uYZFhTQ3OatlQ,iv:86ZewkQ8GSZ+R47FRzdfi+oPSwMquho6oqXW1PeB2ew=,tag:Mi48Ud7H0P/ypzhJbVf5qw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2022-03-05T01:51:38Z"
+    mac: ENC[AES256_GCM,data:No4WY0CDbnwtfnfW/I15ndOpi2Lt3qvkdnvY+74a6UGaPFCjexndDqvcn5kDPfgW3t1Scs4isRWjZi/KkS5bA7TaSGwcdcqnHe4bmeqpzg1x2XFvlSZSbEcAVfYCHV3Tfg22xjszPsqytTAqpZdZ1QP1Hhb9WbfrjkyvFh6xBwM=,iv:T3Nz3I1Am0T3zM5tY0cJ3OyDdt8OUwbpMm0iTq4ozRc=,tag:kbkzFWPKYvqF5Ot1+5Ql4w==,type:str]
+    pgp:
+        - created_at: "2022-03-05T01:51:37Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyV9b1w7rilCAQ/+Jd8fBw6TrqLfbgcVGHhnmtoU0YQ0gfBb1c7M4MrxXZHc
+            Rz0ATYJ06P6wexwmuQrIsAm5WADU9M+WaOTHfLIu9uunNaHhvdWYZUSOGZnGELHf
+            Gi0Ie+9rd5MSZm10J/dkMCB/WktVQDdJU+HmVGWC0nwHuZxNGaJrW+/zKLMTfl/m
+            YtkQSihFmcA0PI93ZSpLx9jjHdEKZ3yU9Pl7cizRJm6SE8qSlAzt4T9Gl4Sus9xR
+            YaN7vjx0isY+LwabWpzy2imC3hoSToEwb5LtdH/vpeEwftpV0UnHXVDhvWBlTvqp
+            Xl6fYS6/P4+MAD8P3F+KKk/cTwEpx17c7r/22hJ3qBtwqNgEpEA9CQbLfYFxgfI4
+            ExxEgCnan/QRIqjkR2lPNZVoPqk42D52fO0blu2QG75ROIHolzGr932buIW+DkFj
+            bpd9IWSwWKzQjCcsgtBC6hya625yhbs3qvq6SzkxpWZbXySXXAv7E4U8HkLXNTR9
+            WE1bbpz2i8lFLJ32AcmG0UyGJkqDDeUOJIUFaCHYMO9AF/iy6KeCF7P9Fuarqy+G
+            /dyWa+6fe3XD4a8O9BealP9veVDqZrkxPbkBCWmHnegtDDcCYywVuHOOxYge+Mgp
+            fGq1LpvYiim4gY6/Xrdbo8Dry5fTxPI2Xl207yHUBEBXRK1Yxe4/NiWu4i8d2jTS
+            XgGNumSdYHLGI+V0XFhyq8Qb3/tx4kynqFUrSBUI5O7ZeDgc5XVKdR4Gm6hVcRJQ
+            d/Dsn0HNj1OHSqaW0IMUdr1yLqTkZtySipJBgWAlNU+dxwZaIlfKtHkAqvzvLTk=
+            =F4zl
+            -----END PGP MESSAGE-----
+          fp: 9B943C63F470C6AEF51D02E51966026E6BC4FA59
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1

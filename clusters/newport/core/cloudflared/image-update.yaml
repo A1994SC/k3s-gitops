@@ -1,0 +1,21 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: cloudflare
+  namespace: flux-system
+spec:
+  image: cloudflare/cloudflared
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: cloudflare
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cloudflare
+  policy:
+    semver:
+      range: 202x
