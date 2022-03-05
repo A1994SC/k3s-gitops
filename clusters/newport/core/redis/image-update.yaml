@@ -1,0 +1,43 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: redis-operator
+  namespace: flux-system
+spec:
+  image: quay.io/opstree/redis-operator
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: redis-operator
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: redis-operator
+  policy:
+    semver:
+      range: v0.x
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: redis
+  namespace: flux-system
+spec:
+  image: quay.io/opstree/redis
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: redis
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: redis
+  policy:
+    semver:
+      range: v0.x
