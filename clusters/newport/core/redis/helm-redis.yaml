@@ -54,6 +54,7 @@ metadata:
 spec:
   chart:
     spec:
+      version: 0.8.0
       chart: redis-cluster
       sourceRef:
         kind: HelmRepository
