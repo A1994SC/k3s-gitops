@@ -1,4 +1,3 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -7,12 +6,11 @@ metadata:
 spec:
   interval: 60m0s
   url: https://ot-container-kit.github.io/helm-charts/
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: redis-operator  
+  name: redis-operator
   namespace: redis
 spec:
   chart:
@@ -44,7 +42,6 @@ spec:
     tolerateAllTaints: false
     tolerations: []
     affinity: {}
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -64,7 +61,7 @@ spec:
     redisCluster:
       clusterSize: 3
       image: quay.io/opstree/redis # {"$imagepolicy": "flux-system:redis:name"}
-      tag: v6.2.5 # {"$imagepolicy": "flux-system:redis:name"}
+      tag: quay.io/opstree/redis # {"$imagepolicy": "flux-system:redis:name"}
       imagePullPolicy: IfNotPresent
       redisSecret:
         secretName: redis-secret
@@ -77,34 +74,29 @@ spec:
         replicas: 0
         serviceType: ClusterIP
         affinity: {}
-      resources: 
+      resources:
         requests:
           cpu: 100m
           memory: 128Mi
         limits:
           cpu: 1000m
           memory: 1024Mi
-
     externalService:
       enabled: false
       serviceType: LoadBalancer
       port: 6379
-
     serviceMonitor:
       enabled: false
       interval: 30s
       scrapeTimeout: 10s
       namespace: monitoring
-
     redisExporter:
       enabled: true
       image: quay.io/opstree/redis-exporter
       tag: "1.0"
       imagePullPolicy: IfNotPresent
       resources: {}
-
     nodeSelector: {}
-
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -112,6 +104,5 @@ spec:
           resources:
             requests:
               storage: 1Gi
-
     securityContext: {}
     affinity: {}
