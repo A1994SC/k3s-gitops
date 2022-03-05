@@ -31,8 +31,8 @@ spec:
     replicaCount: 3
 
     image:
-      repository: quay.io/jetstack/cert-manager-controller
-      tag: v1.7.0
+      repository: quay.io/jetstack/cert-manager-controller # {"$imagepolicy": "flux-system:cert-manager-controller:name"}
+      tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
       pullPolicy: Always
 
     extraArgs:
@@ -74,8 +74,8 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       image:
-        repository: quay.io/jetstack/cert-manager-webhook
-        tag: v1.7.0
+        repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
+        tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
         pullPolicy: Always
       serviceAccount:
         create: true
@@ -96,6 +96,6 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       image:
-        repository: quay.io/jetstack/cert-manager-cainjector
-        tag: v1.7.0
+        repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
+        tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
         pullPolicy: Always
