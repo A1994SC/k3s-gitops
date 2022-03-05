@@ -7,7 +7,7 @@ metadata:
     app: sn-sync-worker
     group: standardnotes
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: sn-sync-worker
@@ -57,7 +57,7 @@ metadata:
     app: sn-auth-worker
     group: standardnotes
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: sn-auth-worker
