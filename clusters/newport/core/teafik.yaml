@@ -87,7 +87,7 @@ spec:
 
     service:
       enabled: true
-      type: NodePort
+      type: ClusterIP
 
     nodeSelector:
       node-role.kubernetes.io/master: "true"
