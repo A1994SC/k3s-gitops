@@ -1,4 +1,3 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
@@ -7,12 +6,11 @@ metadata:
 spec:
   interval: 1m0s
   url: https://charts.jetstack.io
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cert-manager 
+  name: cert-manager
   namespace: cert-manager
 spec:
   chart:
@@ -27,18 +25,14 @@ spec:
       # Set the verbosity of cert-manager. Range of 0 - 6 with 6 being the most verbose.
       logLevel: 2
     installCRDs: true
-
     replicaCount: 3
-
     image:
       repository: quay.io/jetstack/cert-manager-controller # {"$imagepolicy": "flux-system:cert-manager-controller:name"}
-      tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
+      tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
       pullPolicy: Always
-
     extraArgs:
-      - --dns01-recursive-nameservers-only
-      - --dns01-recursive-nameservers="1.1.1.1:53"
-
+    - --dns01-recursive-nameservers-only
+    - --dns01-recursive-nameservers="1.1.1.1:53"
     resources:
       requests:
         cpu: 50m
@@ -46,21 +40,16 @@ spec:
       limits:
         cpu: 100m
         memory: 512Mi
-
     securityContext:
       runAsNonRoot: true
- 
     podDnsConfig:
       nameservers:
-        - "1.1.1.1"
-        - "8.8.8.8"
-
+      - "1.1.1.1"
+      - "8.8.8.8"
     nodeSelector:
       node-role.kubernetes.io/master: "true"
-
     prometheus:
       enabled: false
-
     webhook:
       replicaCount: 3
       timeoutSeconds: 10
@@ -75,14 +64,13 @@ spec:
         node-role.kubernetes.io/master: "true"
       image:
         repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
-        tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
+        tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
         pullPolicy: Always
       serviceAccount:
         create: true
         automountServiceAccountToken: true
       securePort: 10250
       serviceType: ClusterIP
-
     cainjector:
       enabled: true
       replicaCount: 3
@@ -96,6 +84,6 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: "true"
       image:
-        repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
-        tag: v1.7.0 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
+        repository: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
+        tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
         pullPolicy: Always
