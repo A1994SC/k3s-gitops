@@ -1,0 +1,21 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: xbs
+  namespace: flux-system
+spec:
+  image: tetricz/xbs-api
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: xbs
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: xbs
+  policy:
+    semver:
+      range: "arm64202x"

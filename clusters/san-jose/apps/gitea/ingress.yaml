@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitea
+  namespace: apps
+  annotations:
+    # set ingress controller
+    ingressClassName: "traefik"
+    # default settings for traefik
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # sticky session for traefik
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "cookies"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    # flame dashboard stuff
+    flame.pawelmalak/type: "app"
+    flame.pawelmalak/name: "Gitea"
+    flame.pawelmalak/url: "https://git.derpaholic.com"
+    flame.pawelmalak/icon: "git" # optional, default is "kubernetes" https://materialdesignicons.com/
+  labels:
+    group: gitea
+spec:
+  defaultBackend:
+    service:
+      name: gitea
+      port:
+        name: web
+  rules:
+  - host: git.derpaholic.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: gitea
+            port:
+              name: web
+        path: /
+        pathType: Prefix
+  tls:
+  - secretName: tls-cert-derpaholic-com

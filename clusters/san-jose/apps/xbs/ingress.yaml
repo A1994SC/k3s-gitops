@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xbs
+  namespace: apps
+  annotations:
+    # set ingress controller
+    #ingressClassName: "traefik"
+    #kubernetes.io/ingress.class: "traefik"
+    #ingress.class: "traefik"
+    ## default settings
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd, routes-cloudflare-white-list@kubernetescrd"
+    #traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    ## sticky session
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "cookies"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    ## set ingress controller
+    #ingressClassName: "nginx"
+    #kubernetes.io/ingress.class: "nginx"
+    #ingress.class: "nginx"
+    ## default settings
+    #nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    ## sticky session
+    #nginx.ingress.kubernetes.io/affinity: "cookie"
+    #nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    #nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    #nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    # flame dashboard stuff
+    flame.pawelmalak/type: "app"
+    flame.pawelmalak/name: "xBroswer Sync"
+    flame.pawelmalak/url: "https://xbs.derpaholic.com"
+    flame.pawelmalak/icon: "book-account" # optional, default is "kubernetes"
+  labels:
+    group: xbs
+spec:
+  defaultBackend:
+    service:
+      name: xbs
+      port:
+        name: web
+  rules:
+  - host: xbs.derpaholic.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: xbs
+            port:
+              name: web
+        path: /
+        pathType: Prefix
+  tls:
+  - secretName: tls-cert-derpaholic-com

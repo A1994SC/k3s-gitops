@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitea-environment
+  namespace: apps
+  labels:
+    group: gitea
+data:
+  TZ: "America/New_York"
+  USER_UID: "1000"
+  USER_GID: "1000"

@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea
+  namespace: apps
+  labels:
+    group: gitea
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80       
+      targetPort: 3000 # the port for the pod
+  selector:
+    app: gitea
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: gitea-ssh
+#  namespace: apps
+#  labels:
+#    group: gitea
+#  annotations:
+#    metallb.universe.tf/address-pool: default
+#spec:
+#  ports:
+#    - protocol: TCP
+#      name: ssh
+#      port: 22
+#      targetPort: 22
+#  selector:
+#    app: gitea
+#  type: LoadBalancer
+#  loadBalancerIP: 10.2.25.151

@@ -23,8 +23,6 @@ spec:
               - key: "kubernetes.io/arch"
                 operator: In
                 values: ["amd64"]
-      nodeSelector:
-        node-role.kubernetes.io/master: "true"
       containers:
       - name: cloudflared
         image: cloudflare/cloudflared:2022.1.0 # {"$imagepolicy": "flux-system:cloudflare"}
@@ -51,7 +49,6 @@ spec:
       volumes:
       - name: creds
         secret:
-          # kubectl -n ingress create secret generic tunnel-credentials --from-file=credentials.json=/home/ascii/.cloudflared/<tunnel ID>.json
           secretName: tunnel-credentials
       - name: config
         configMap:
