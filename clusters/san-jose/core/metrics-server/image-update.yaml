@@ -2,20 +2,20 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: xbs
+  name: metrics-server
   namespace: flux-system
 spec:
-  image: tetricz/xbs-api
+  image: k8s.gcr.io/metrics-server/metrics-server
   interval: 60m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: xbs
+  name: metrics-server
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: xbs
+    name: metrics-server
   policy:
     semver:
-      range: "arm64202x"
+      range: v0.x
