@@ -13,6 +13,8 @@ spec:
   selector:
     matchLabels:
       app: gitea
+  updateStrategy: 
+    type: rollingUpdate
   template:
     metadata:
       labels:
