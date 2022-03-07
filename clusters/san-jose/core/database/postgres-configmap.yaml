@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: ingress
+data:
+  POSTGRES_DB: admin
+  POSTGRES_USER: root
+  PGDATA: /data/postgres

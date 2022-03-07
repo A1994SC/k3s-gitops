@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: ingress
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: "mongo"
+  replicas: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      terminationGracePeriodSeconds: 10
+      tolerations:
+        - key: "critical.derpaholic.com"
+          operator: "Equal"
+          value: "mission"
+      containers:
+      - name: database
+        image: mongo:4.4.4
+        envFrom:
+        - secretRef:
+            name: mongo
+        - configMapRef:
+            name: mongo-config
+        ports:
+        - containerPort: 27017
+          name: db
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+        volumeMounts:
+        - name: data
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "local-path"
+      resources:
+        requests:
+          storage: 5Gi
