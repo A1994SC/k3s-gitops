@@ -42,14 +42,26 @@ spec:
         memory: 512Mi
     securityContext:
       runAsNonRoot: true
+    podLabels:
+      group: cert-manager
     podDnsConfig:
       nameservers:
       - "1.1.1.1"
       - "8.8.8.8"
-    nodeSelector:
-      node-role.kubernetes.io/master: "true"
     prometheus:
       enabled: false
+    affinity:
+      podAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                  - cert-manager
+              topologyKey: topology.kubernetes.io/zone
     webhook:
       replicaCount: 3
       timeoutSeconds: 10
@@ -60,8 +72,20 @@ spec:
         limits:
           cpu: 100m
           memory: 512Mi
-      nodeSelector:
-        node-role.kubernetes.io/master: "true"
+      podLabels:
+        group: cert-manager
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: group
+                    operator: In
+                    values:
+                    - cert-manager
+                topologyKey: topology.kubernetes.io/zone
       image:
         repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
         tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
@@ -81,8 +105,20 @@ spec:
         limits:
           cpu: 100m
           memory: 512Mi
-      nodeSelector:
-        node-role.kubernetes.io/master: "true"
+      podLabels:
+        group: cert-manager
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: group
+                    operator: In
+                    values:
+                    - cert-manager
+                topologyKey: topology.kubernetes.io/zone
       image:
         repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:name"}
         tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
