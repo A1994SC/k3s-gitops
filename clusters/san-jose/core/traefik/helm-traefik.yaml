@@ -27,7 +27,7 @@ spec:
       pullPolicy: IfNotPresent
     deployment:
       enabled: true
-      kind: Daemonset
+      kind: Deployment
       replicas: 1
       terminationGracePeriodSeconds: 60
     ingressClass:
