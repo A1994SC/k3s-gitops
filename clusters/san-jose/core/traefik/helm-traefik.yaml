@@ -1,0 +1,83 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: traefik
+  namespace: ingress
+spec:
+  interval: 60m0s
+  url: https://helm.traefik.io/traefik
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: ingress
+spec:
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+  interval: 60m0s
+  values:
+    image:
+      name: traefik # {"$imagepolicy": "flux-system:traefik:name"}
+      tag: "2.6.1" # {"$imagepolicy": "flux-system:traefik:tag"}
+      pullPolicy: IfNotPresent
+    deployment:
+      enabled: true
+      kind: Deployment
+      replicas: 3
+      terminationGracePeriodSeconds: 60
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+    providers:
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+    logs:
+      general:
+        level: INFO
+    metrics:
+      # datadog:
+      #   address: 127.0.0.1:8125
+      # influxdb:
+      #   address: localhost:8089
+      #   protocol: udp
+      prometheus:
+        entryPoint: metrics
+      # statsd:
+      #   address: localhost:8125
+    ports:
+      traefik:
+        port: 9000
+        expose: false
+        exposedPort: 9000
+        protocol: TCP
+      web:
+        port: 8000
+        hostPort: 80
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+        redirectTo: websecure
+      websecure:
+        port: 8443
+        hostPort: 443
+        expose: true
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: false
+      metrics:
+        port: 9100
+        expose: false
+        exposedPort: 9100
+        protocol: TCP
+    service:
+      enabled: true
+      type: ClusterIP
+    nodeSelector:
+      node-role.kubernetes.io/master: "true"

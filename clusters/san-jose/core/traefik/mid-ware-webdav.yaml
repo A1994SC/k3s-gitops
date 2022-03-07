@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: webdav-redirect
+  namespace: routes
+spec:
+  redirectRegex:
+    regex: ^https://(.*)/.well-known/(card|cal)dav
+    replacement: https://$$1/dav.php/
+    permanent: true
