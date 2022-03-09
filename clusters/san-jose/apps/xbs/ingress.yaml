@@ -9,8 +9,8 @@ metadata:
     #kubernetes.io/ingress.class: "traefik"
     #ingress.class: "traefik"
     ## default settings
-    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd, routes-cloudflare-white-list@kubernetescrd"
-    #traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    # traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd, routes-cloudflare-white-list@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/service.passhostheader: "true"
     traefik.ingress.kubernetes.io/router.tls: "true"
