@@ -12,9 +12,9 @@ spec:
     commit:
       author:
         email: bot@conlon.dev
-        name: ASCii Bot
+        name: ascii17bot
       messageTemplate: |
-        Automated image update
+        Automated image update - Newport News
 
         Automation name: {{ .AutomationObject }}
 
