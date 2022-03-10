@@ -15,8 +15,6 @@ data:
     ingress:
     - hostname: "*.derpaholic.com"
       service: https://traefik.ingress.svc.cluster.local:443
-      originRequest:
-        originServerName: kub.derpaholic.com
     - hostname: "*.conlon.dev"
       service: https://traefik.ingress.svc.cluster.local:443
     - service: http_status:404
