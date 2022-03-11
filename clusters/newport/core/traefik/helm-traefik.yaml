@@ -82,7 +82,7 @@ spec:
         protocol: TCP
     service:
       enabled: true
-      type: NodePort
+      type: LoadBalancer
       spec:
         loadBalancerIP: "10.2.25.150"
     nodeSelector:
