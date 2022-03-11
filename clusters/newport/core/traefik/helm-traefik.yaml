@@ -30,6 +30,8 @@ spec:
       kind: Deployment
       replicas: 3
       terminationGracePeriodSeconds: 60
+      labels: 
+        app: traefik
     ingressClass:
       enabled: true
       isDefaultClass: true
@@ -50,6 +52,8 @@ spec:
         entryPoint: metrics
       # statsd:
       #   address: localhost:8125
+    globalArguments:
+      - "--global.checknewversion"
     ports:
       traefik:
         port: 9000
