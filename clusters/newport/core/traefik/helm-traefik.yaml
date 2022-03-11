@@ -57,7 +57,8 @@ spec:
     ports:
       traefik:
         port: 9000
-        expose: false
+        hostPort: 9000
+        expose: true
         exposedPort: 9000
         protocol: TCP
       web:
