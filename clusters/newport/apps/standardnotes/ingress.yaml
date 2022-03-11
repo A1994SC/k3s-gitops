@@ -36,15 +36,8 @@ spec:
           service:
             name: sn-api
             port:
-              name: web
+              number: 80
         path: /v1
         pathType: Prefix
-      - backend:
-          service:
-            name: sn-web
-            port:
-              name: web
-        path: /
-        pathType: Exact
   tls:
   - secretName: tls-cert-derpaholic-com

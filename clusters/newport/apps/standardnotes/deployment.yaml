@@ -7,6 +7,7 @@ metadata:
   labels:
     app: sn-sync
     group: standardnotes
+    purpose: manager
 spec:
   replicas: 1
   selector:
@@ -75,6 +76,7 @@ spec:
       labels:
         app: sn-api
         group: standardnotes
+        purpose: manager
     spec:
       affinity:
         nodeAffinity:
@@ -123,6 +125,7 @@ metadata:
   labels:
     app: sn-auth
     group: standardnotes
+    purpose: manager
 spec:
   replicas: 1
   selector:
