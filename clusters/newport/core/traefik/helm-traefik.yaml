@@ -82,6 +82,8 @@ spec:
         protocol: TCP
     service:
       enabled: true
-      type: ClusterIP
+      type: NodePort
+      spec:
+        loadBalancerIP: "10.2.25.150"
     nodeSelector:
       node-role.kubernetes.io/master: "true"

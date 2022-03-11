@@ -6,6 +6,7 @@ metadata:
   labels:
     app: sn-sync-worker
     group: standardnotes
+    purpose: worker
 spec:
   replicas: 1
   selector:
@@ -56,6 +57,7 @@ metadata:
   labels:
     app: sn-auth-worker
     group: standardnotes
+    purpose: worker
 spec:
   replicas: 1
   selector:

@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: routes
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: PathPrefix(`/health`)
+    kind: Rule
+    services:
+    - name: ping@internal
+      kind: TraefikService
+  - match: PathPrefix(`/traefik`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+      sticky:
+        cookie:
+          httpOnly: true
+          name: cookie
+          secure: true
