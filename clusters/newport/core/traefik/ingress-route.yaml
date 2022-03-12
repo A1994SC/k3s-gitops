@@ -13,7 +13,7 @@ spec:
     services:
     - name: ping@internal
       kind: TraefikService
-  - match: Host(`traefik.derpaholic.com`) && PathPrefix(`/traefik`)
+  - match: Host(`traefik.derpaholic.com`)
     kind: Rule
     services:
     - name: api@internal
