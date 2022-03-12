@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`traefik.derpaholic.com`) && PathPrefix(`/health`)
+    kind: Rule
+    services:
+    - name: ping@internal
+      kind: TraefikService
+  - match: Host(`traefik.derpaholic.com`) && PathPrefix(`/traefik`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
