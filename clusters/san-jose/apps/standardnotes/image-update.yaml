@@ -1,0 +1,66 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: sn-sync
+  namespace: flux-system
+spec:
+  image: standardnotes/syncing-server-js
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-sync
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-sync
+  policy:
+    semver:
+      range: 1.x
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: sn-api
+  namespace: flux-system
+spec:
+  image: standardnotes/api-gateway
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-api
+  policy:
+    semver:
+      range: 1.x
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: sn-auth
+  namespace: flux-system
+spec:
+  image: standardnotes/auth
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sn-auth
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: sn-auth
+  policy:
+    semver:
+      range: 1.x
+

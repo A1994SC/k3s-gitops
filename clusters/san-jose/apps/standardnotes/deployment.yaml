@@ -1,0 +1,178 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sn-sync
+  namespace: apps
+  labels:
+    app: sn-sync
+    group: standardnotes
+    purpose: manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-sync
+  template:
+    metadata:
+      labels:
+        app: sn-sync
+        group: standardnotes
+        purpose: manager
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "kubernetes.io/arch"
+                operator: In
+                values: ["amd64"]
+      containers:
+      - name: sn-sync-server
+        image: standardnotes/syncing-server-js:1.49.0 # {"$imagepolicy": "flux-system:sn-sync"}
+        imagePullPolicy: Always
+        command:
+        - ./docker/entrypoint.sh
+        args:
+        - start-web
+        envFrom:
+        - configMapRef:
+            name: sn-default-env
+        - secretRef:
+            name: sn-secret
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sn-api
+  namespace: apps
+  labels:
+    app: sn-api
+    group: standardnotes
+    purpose: manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-api
+  template:
+    metadata:
+      labels:
+        app: sn-api
+        group: standardnotes
+        purpose: manager
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "kubernetes.io/arch"
+                operator: In
+                values: ["amd64"]
+      containers:
+      - name: sn-api-gateway-server
+        image: standardnotes/api-gateway:1.34.4 # {"$imagepolicy": "flux-system:sn-api"}
+        imagePullPolicy: Always
+        command:
+        - ./docker/entrypoint.sh
+        args:
+        - start-web
+        envFrom:
+        - configMapRef:
+            name: sn-default-env
+        - configMapRef:
+            name: sn-api-env
+        - secretRef:
+            name: sn-secret
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sn-auth
+  namespace: apps
+  labels:
+    app: sn-auth
+    group: standardnotes
+    purpose: manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-auth
+  template:
+    metadata:
+      labels:
+        app: sn-auth
+        group: standardnotes
+        purpose: manager
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "kubernetes.io/arch"
+                operator: In
+                values: ["amd64"]
+      containers:
+      - name: sn-auth-server
+        image: standardnotes/auth:1.39.1 # {"$imagepolicy": "flux-system:sn-auth"}
+        imagePullPolicy: Always
+        command:
+        - ./docker/entrypoint.sh
+        args:
+        - start-web
+        envFrom:
+        - configMapRef:
+            name: sn-default-env
+        - configMapRef:
+            name: sn-auth-env
+        - secretRef:
+            name: sn-secret
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
