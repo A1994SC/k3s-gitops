@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-svc
+  namespace: apps
+  labels:
+    group: db-clients
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80       
+      targetPort: 8080 # the port for the pod
+  selector:
+    app: adminer-app

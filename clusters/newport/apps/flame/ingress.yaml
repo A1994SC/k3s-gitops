@@ -1,0 +1,44 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flame
+  namespace: apps
+  annotations:
+    # set ingress controller
+    ingressClassName: "traefik"
+    # default settings for traefik
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # sticky session for traefik
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "cookies"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    # flame dashboard stuff
+    #flame.pawelmalak/type: "app"
+    #flame.pawelmalak/name: ""
+    #flame.pawelmalak/url: "https://<>.derpaholic.com"
+    #flame.pawelmalak/icon: "" # optional, default is "kubernetes" https://materialdesignicons.com/
+  labels:
+    groups: dashboard
+spec:
+  defaultBackend:
+    service:
+      name: flame-dash
+      port:
+        name: web
+  rules:
+  - host: dash.derpaholic.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: flame-dash
+            port:
+              name: web
+        path: /
+        pathType: Prefix
+  tls:
+  - secretName: tls-cert-derpaholic-com
