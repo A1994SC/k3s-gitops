@@ -12,8 +12,8 @@ data:
   VERSION: "local"
   # AUTH_JWT_SECRET: "auth_jwt_secret"
   PORT: "3000"
-  DB_HOST: "database.ingress.svc.cluster.local"
-  DB_REPLICA_HOST: "database.ingress.svc.cluster.local"
+  DB_HOST: "maria.ingress.svc.cluster.local"
+  DB_REPLICA_HOST: "maria.ingress.svc.cluster.local"
   DB_PORT: "3306"
   DB_USERNAME: "standard" 
   # DB_PASSWORD: changeme123
