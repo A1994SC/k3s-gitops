@@ -25,7 +25,7 @@ spec:
       # Set the verbosity of cert-manager. Range of 0 - 6 with 6 being the most verbose.
       logLevel: 2
     installCRDs: true
-    replicaCount: 3
+    replicaCount: 1
     image:
       repository: quay.io/jetstack/cert-manager-controller # {"$imagepolicy": "flux-system:cert-manager-controller:name"}
       tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
