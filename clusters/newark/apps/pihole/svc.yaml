@@ -10,7 +10,6 @@ spec:
   type: ClusterIP
   selector:
     app: pihole
-  externalTrafficPolicy: Local
   ports:
     - name: dns
       protocol: UDP
