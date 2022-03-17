@@ -1,0 +1,70 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pihole
+  namespace: pihole
+  labels:
+    app: pihole
+    groups: network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+  template:
+    metadata:
+      labels:
+        app: pihole
+        group: network
+    spec:
+      hostname: pihole
+      containers:
+      - name: pihole
+        image: pihole/pihole:latest
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        envFrom:
+          - configMapRef:
+              name: pihole
+        env:
+          - name: WEBPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pihole-secret
+                key: WEBPASSWORD
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: main
+          mountPath: /etc/pihole
+        - name: dnsmasq
+          mountPath: /etc/dnsmasq.d
+        ports:
+        - name: dns-u
+          hostPort: 53
+          containerPort: 53
+          protocol: UDP
+        - name: dns-t
+          hostPort: 53
+          containerPort: 53
+          protocol: TCP
+        - name: web
+          containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1024Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+      volumes:
+      - name: main
+        persistentVolumeClaim:
+          claimName: pihole-main
+      - name: dnsmasq
+        persistentVolumeClaim:
+          claimName: pihole-dnsmasq
+      dnsPolicy: ClusterFirstWithHostNet
+      restartPolicy: Always

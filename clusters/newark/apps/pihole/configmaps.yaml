@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pihole
+  namespace: pihole
+  labels:
+    group: network
+data:  
+  TZ: "America/New_York"
+  PIHOLE_DNS_: "1.1.1.1"
+  DNSSEC: "false"
+  TEMPERATUREUNIT: "f"
+  WEBUIBOXEDLAYOUT: "boxed"
+  WEBTHEME: "default-dark"
+  DNSMASQ_LISTENING: "all"

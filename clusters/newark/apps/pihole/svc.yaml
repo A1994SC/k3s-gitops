@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole
+  namespace: pihole
+  labels:
+    group: network
+spec:
+  type: ClusterIP
+  selector:
+    app: pihole
+  externalTrafficPolicy: Local
+  ports:
+    - name: dns
+      protocol: UDP
+      port: 53
+      targetPort: 53
+    - name: dns-t
+      protocol: TCP
+      port: 53
+      targetPort: 53
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
