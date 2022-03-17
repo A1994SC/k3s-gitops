@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tunnel-pem
+    namespace: ingress
+type: Opaque
+stringData:
+    cert.pem: ENC[AES256_GCM,data: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,iv:smkItil6bVQ90O4OWaFBhAQjPnkHS1m69v5dX57bu1o=,tag:GRkyNr35wa2cQ2+Jrc2VJA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2022-03-17T20:06:46Z"
+    mac: ENC[AES256_GCM,data:xDib1L8jg+keQLyai/JlSEgCFaWdbZqmSQLA5Gmkhppq/LAG8vP3z3/WkaHJsISFSDJTlnyBHafEGw6AFi5n43ghBVEdYZyuCfnXAFqR1JuEVwfcGtBlTt+NZNjc4xXSsD+4Z2cYW3I7Yo6zVJrAYA6DjKxiLtc/vmAKfqGYYZE=,iv:t/4j9YC9yCOAKRDbtU9p4lsyGbEL+pE/+3/ebeIvV6o=,tag:19MenjmZmDIbdFKhTbT83A==,type:str]
+    pgp:
+        - created_at: "2022-03-17T20:06:45Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA8HJM/S6WGi8AQ//exhE3gw318eBHBwVXeiw4D5PNHoEWbol+Z53NDaNj7dM
+            TbCRCEj8gc7o7rxmn6pU5yneBhR3kUjXDxhwL7bGWdBtLOCjfjGC4eScn3PrhJ8R
+            Kn7q9T1VU8rXFx9weazJqbA5IuWComo/vt0vf/OTHjkitKnCLJeoIXeI/VtK83YZ
+            /VGL9g0qZGXq9W1xmyXp2b0pXsSGH2nQyKMd0GqHa9pZ2M6Q0E+mZjdE66uKlDZy
+            CNqhZQMibPGSxiUvSDUUNhltmG7qRoq/sPzA3ymb7FKDKtSYdRDOlmZwGQ20DNGb
+            8zFbq/U7u1qIIg3BgPYd8nsDXB/9T7p4PrzVwEfaukvS+YGhgALpeY6YILB6CMI7
+            W0FcBKpSCcAXFWghKsPYLbcMMwBv8XyFbxe2tCMY/3mI+Ou8ha01GhkdUPmsb9Ff
+            T9c/yxMUqxEBYI+HXP4bM5dWIlW+r2htJR0rRDkko++uUmbpNXTbZISavufG8LtR
+            2fF6HVeLkObQatPgYc293uGol4oy3mk3YCwhF9sKJJFLP0UA7ta8Z096u4LtaSGc
+            hs1S10mqyyfVANy2jR2l+6PWxB8LqhFV4krTZPOCxlajDpTTZPMHUfwnRJZSZ0sQ
+            f4y7dhQxJB+JXAyRapU41slBCMEbs1rkeueolu1y5PN4RiKLkMrHNAnTv6JPirzU
+            aAEJAhB9mWM0h681tJhb/pool59MGPVyUIxA4WFGCzAwhDrVx8G4T+JscU+7zegS
+            PM2FPt1kFUxf5XiYiA80ueQ8SCk9xHthWWUruv3D6PuHd9s+A0SHIbSWdUcFxRM3
+            eOz2ddtd7E1o
+            =VpSd
+            -----END PGP MESSAGE-----
+          fp: 412ECB5B783A4731BED1F2F8986B9B5121BCBFFD
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.2
