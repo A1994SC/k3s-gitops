@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pihole
-  namespace: pihole
+  namespace: apps
   annotations:
     ingressClassName: "traefik"
     traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd, routes-pihole-add@kubernetescrd"

@@ -3,7 +3,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: pihole
-  namespace: pihole
+  namespace: apps
   labels:
     app: pihole
     groups: network
