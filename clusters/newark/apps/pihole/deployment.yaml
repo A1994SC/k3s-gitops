@@ -50,6 +50,7 @@ spec:
           containerPort: 53
           protocol: TCP
         - name: web
+          hostPort: 8080
           containerPort: 80
           protocol: TCP
         resources:
