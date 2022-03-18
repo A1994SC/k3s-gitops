@@ -27,7 +27,7 @@ spec:
         node-role.kubernetes.io/master: "true"
       containers:
       - name: cloudflared
-        image: cloudflare/cloudflared:2022.3.2 # {"$imagepolicy": "flux-system:cloudflare"}
+        image: cloudflare/cloudflared:2022.3.3 # {"$imagepolicy": "flux-system:cloudflare"}
         args:
         - tunnel
         # Points cloudflared to the config file, which configures what
