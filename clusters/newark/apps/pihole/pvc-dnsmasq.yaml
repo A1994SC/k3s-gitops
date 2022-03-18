@@ -2,7 +2,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pihole-dnsmasq 
+  name: pihole-dnsmasq
+  namespace: apps
 spec:
   accessModes:
     - ReadWriteOnce
