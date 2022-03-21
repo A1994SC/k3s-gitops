@@ -81,7 +81,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-auth-worker
-        image: standardnotes/auth:1.40.2 # {"$imagepolicy": "flux-system:sn-auth"}
+        image: standardnotes/auth:1.40.3 # {"$imagepolicy": "flux-system:sn-auth"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
