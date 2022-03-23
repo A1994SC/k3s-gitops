@@ -28,7 +28,7 @@ spec:
     replicaCount: 3
     image:
       repository: quay.io/jetstack/cert-manager-controller # {"$imagepolicy": "flux-system:cert-manager-controller:name"}
-      tag: v1.7.2 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
+      tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
       pullPolicy: Always
     extraArgs:
     - --dns01-recursive-nameservers-only
@@ -88,7 +88,7 @@ spec:
               topologyKey: topology.kubernetes.io/zone
       image:
         repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
-        tag: v1.7.2 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
+        tag: v1.7.1 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
         pullPolicy: Always
       serviceAccount:
         create: true
