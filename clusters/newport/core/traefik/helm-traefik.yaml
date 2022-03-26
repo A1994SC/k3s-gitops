@@ -23,14 +23,14 @@ spec:
   values:
     image:
       name: traefik # {"$imagepolicy": "flux-system:traefik:name"}
-      tag: "2.6.1" # {"$imagepolicy": "flux-system:traefik:tag"}
+      tag: "2.6.2" # {"$imagepolicy": "flux-system:traefik:tag"}
       pullPolicy: IfNotPresent
     deployment:
       enabled: true
       kind: Deployment
       replicas: 3
       terminationGracePeriodSeconds: 60
-      labels: 
+      labels:
         app: traefik
     ingressClass:
       enabled: true
@@ -50,10 +50,10 @@ spec:
       #   protocol: udp
       prometheus:
         entryPoint: metrics
-      # statsd:
-      #   address: localhost:8125
+        # statsd:
+        #   address: localhost:8125
     globalArguments:
-      - "--global.checknewversion"
+    - "--global.checknewversion"
     ports:
       traefik:
         port: 9000

@@ -29,7 +29,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-sync-server
-        image: standardnotes/syncing-server-js:1.51.0 # {"$imagepolicy": "flux-system:sn-sync"}
+        image: standardnotes/syncing-server-js:1.51.2 # {"$imagepolicy": "flux-system:sn-sync"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
@@ -87,7 +87,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-api-gateway-server
-        image: standardnotes/api-gateway:1.35.0 # {"$imagepolicy": "flux-system:sn-api"}
+        image: standardnotes/api-gateway:1.36.0 # {"$imagepolicy": "flux-system:sn-api"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
@@ -147,7 +147,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-auth-server
-        image: standardnotes/auth:1.41.2 # {"$imagepolicy": "flux-system:sn-auth"}
+        image: standardnotes/auth:1.41.7 # {"$imagepolicy": "flux-system:sn-auth"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh
