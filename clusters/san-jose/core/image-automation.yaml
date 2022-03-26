@@ -36,7 +36,7 @@ spec:
         secretRef:
           name: git-pgp
     push:
-      branch: main
+      branch: auto
   interval: 3600m0s
   sourceRef:
     kind: GitRepository
