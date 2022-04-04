@@ -31,7 +31,6 @@ spec:
           operator: "Exists"
       nodeSelector:
         kubernetes.io/os: linux
-        node-role.kubernetes.io/master: "true"
       affinity:
          podAntiAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
