@@ -1,0 +1,21 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: metrics-server
+  namespace: flux-system
+spec:
+  image: k8s.gcr.io/metrics-server/metrics-server
+  interval: 60m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: metrics-server
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: metrics-server
+  policy:
+    semver:
+      range: v0.x
