@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conlon-links-svc
+  namespace: apps
+  labels:
+    group: website
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+      targetPort: 3000 # the port for the pod
+  selector:
+    app: conlon-links-api
