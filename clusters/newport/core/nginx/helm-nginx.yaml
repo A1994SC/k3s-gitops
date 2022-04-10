@@ -52,7 +52,7 @@ spec:
       #   cpu: 100m
       #   memory: 64Mi
 
-      replicaCount: 3
+      replicaCount: 1
       ingressClass: "nginx"
       setAsDefaultIngress: false
       enableCustomResources: true

@@ -37,7 +37,7 @@ spec:
       pspEnabled: false
     apiService:
       create: true
-    replicas: 3
+    replicas: 1
     defaultArgs:
     - --cert-dir=/tmp
     - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
