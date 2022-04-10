@@ -22,68 +22,206 @@ spec:
   interval: 60m0s
   values:
     global:
+      priorityClassName: ""
+      rbac:
+        create: true
+        aggregateClusterRoles: true
+    
+      podSecurityPolicy:
+        enabled: false
+        useAppArmor: true
+    
       # Set the verbosity of cert-manager. Range of 0 - 6 with 6 being the most verbose.
       logLevel: 2
+    
+      leaderElection:
+        # Override the namespace used to store the ConfigMap for leader election
+        namespace: "kube-system"
+    
+        # The duration that non-leader candidates will wait after observing a
+        # leadership renewal until attempting to acquire leadership of a led but
+        # unrenewed leader slot. This is effectively the maximum duration that a
+        # leader can be stopped before it is replaced by another candidate.
+        # leaseDuration: 60s
+    
+        # The interval between attempts by the acting master to renew a leadership
+        # slot before it stops leading. This must be less than or equal to the
+        # lease duration.
+        # renewDeadline: 40s
+    
+        # The duration the clients should wait between attempting acquisition and
+        # renewal of a leadership.
+        # retryPeriod: 15s
+    
     installCRDs: true
+    
     replicaCount: 1
     image:
-      repository: quay.io/jetstack/cert-manager-controller # {"$imagepolicy": "flux-system:cert-manager-controller:name"}
-      tag: v1.7.2 # {"$imagepolicy": "flux-system:cert-manager-controller:tag"}
-      pullPolicy: Always
+      registry: quay.io
+      repository: jetstack/cert-manager-controller
+      pullPolicy: IfNotPresent
+    clusterResourceNamespace: ""
+    
+    serviceAccount:
+      create: true
+      automountServiceAccountToken: true
+
     extraArgs:
     - --dns01-recursive-nameservers-only
     - --dns01-recursive-nameservers="1.1.1.1:53"
-    resources:
+
+    resources: 
       requests:
-        cpu: 50m
-        memory: 64Mi
+        cpu: 10m
+        memory: 32Mi
       limits:
         cpu: 100m
-        memory: 512Mi
-    securityContext:
-      runAsNonRoot: true
+        memory: 256Mi
+
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+
     podDnsConfig:
       nameservers:
-      - "1.1.1.1"
-      - "8.8.8.8"
+        - "1.1.1.1"
+        - "8.8.8.8"
+    
     nodeSelector:
-      node-role.kubernetes.io/master: "true"
+      kubernetes.io/os: linux
+    
     prometheus:
       enabled: false
+    
+    affinity:
+      podAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: group
+                operator: In
+                values:
+                - cert-manager
+            topologyKey: topology.kubernetes.io/zone
+
     webhook:
       replicaCount: 1
       timeoutSeconds: 10
-      resources:
+      securityContext:
+        runAsNonRoot: true
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 1
+    
+      resources: 
         requests:
-          cpu: 20m
-          memory: 64Mi
+          cpu: 10m
+          memory: 32Mi
         limits:
           cpu: 100m
-          memory: 512Mi
+          memory: 256Mi
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        kubernetes.io/os: linux
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                  - cert-manager
+              topologyKey: topology.kubernetes.io/zone
       image:
-        repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
-        tag: v1.7.2 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
-        pullPolicy: Always
+        registry: quay.io
+        repository: jetstack/cert-manager-webhook
+        pullPolicy: IfNotPresent
+    
       serviceAccount:
         create: true
         automountServiceAccountToken: true
       securePort: 10250
+      hostNetwork: false
       serviceType: ClusterIP
+      url: {}
+        # host:
+    
     cainjector:
       enabled: true
       replicaCount: 1
-      resources:
+      securityContext:
+        runAsNonRoot: true
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+      resources: 
         requests:
-          cpu: 20m
-          memory: 64Mi
+          cpu: 10m
+          memory: 32Mi
         limits:
           cpu: 100m
-          memory: 512Mi
+          memory: 256Mi
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        kubernetes.io/os: linux
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                  - cert-manager
+              topologyKey: topology.kubernetes.io/zone
       image:
-        repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:name"}
-        tag: v1.7.2 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
-        pullPolicy: Always
+        registry: quay.io
+        repository: jetstack/cert-manager-cainjector
+        pullPolicy: IfNotPresent
+    
+      serviceAccount:
+        create: true
+        automountServiceAccountToken: true
+    startupapicheck:
+      enabled: true
+      securityContext:
+        runAsNonRoot: true
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+      timeout: 1m
+      backoffLimit: 4
+      jobAnnotations:
+        helm.sh/hook: post-install
+        helm.sh/hook-weight: "1"
+        helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+      affinity: {}
+      image:
+        registry: quay.io
+        repository: jetstack/cert-manager-ctl
+        pullPolicy: IfNotPresent
+      rbac:
+        annotations:
+          helm.sh/hook: post-install
+          helm.sh/hook-weight: "-5"
+          helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+      serviceAccount:
+        create: true
+        annotations:
+          helm.sh/hook: post-install
+          helm.sh/hook-weight: "-5"
+          helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+        automountServiceAccountToken: true
