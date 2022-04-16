@@ -9,19 +9,21 @@ stringData:
   upgrade.sh: |
     #!/bin/sh
     set -e
-    apt-get --assume-yes update
-    apt-get --assume-yes upgrade
+    apt update -y
+    apt upgrade -y
 ---
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: bionic
+  name: ubuntu
   namespace: system-upgrade
 spec:
   concurrency: 2
   nodeSelector:
     matchExpressions:
-      - {key: plan.upgrade.cattle.io/bionic, operator: Exists}
+      - - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["ubuntu"]}
+      - key: ""
+        operator: 
   serviceAccountName: system-upgrade
   secrets:
     - name: bionic
@@ -31,5 +33,29 @@ spec:
   version: bionic
   upgrade:
     image: ubuntu
+    command: ["chroot", "/host"]
+    args: ["sh", "/run/system-upgrade/secrets/bionic/upgrade.sh"]
+---
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: debian
+  namespace: system-upgrade
+spec:
+  concurrency: 2
+  nodeSelector:
+    matchExpressions:
+      - - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["debian"]}
+      - key: ""
+        operator: 
+  serviceAccountName: system-upgrade
+  secrets:
+    - name: bionic
+      path: /host/run/system-upgrade/secrets/bionic
+  drain:
+    force: true
+  version: bionic
+  upgrade:
+    image: debian
     command: ["chroot", "/host"]
     args: ["sh", "/run/system-upgrade/secrets/bionic/upgrade.sh"]
