@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: nginx-ingress
+  namespace: flux-system
+spec:
+  interval: 60m0s
+  url: https://helm.nginx.com/stable

@@ -1,14 +1,4 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: weaveworks-kured-charts
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://weaveworks.github.io/kured
-  timeout: 3m
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
