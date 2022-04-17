@@ -6,6 +6,8 @@ metadata:
     component: speaker
   name: speaker
   namespace: metallb-system
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:

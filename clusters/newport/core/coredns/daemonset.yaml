@@ -8,6 +8,8 @@ metadata:
   labels:
     k8s-app: kube-dns
     kubernetes.io/name: "CoreDNS"
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   # replicas: not specified here:
   # 1. Default is 1.
