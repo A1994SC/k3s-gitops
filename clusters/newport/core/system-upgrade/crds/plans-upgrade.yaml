@@ -18,12 +18,10 @@ metadata:
   name: ubuntu
   namespace: system-upgrade
 spec:
-  concurrency: 2
+  concurrency: 1
   nodeSelector:
     matchExpressions:
-      - - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["ubuntu"]}
-      - key: ""
-        operator: 
+      - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["ubuntu"]}
   serviceAccountName: system-upgrade
   secrets:
     - name: bionic
@@ -42,19 +40,17 @@ metadata:
   name: debian
   namespace: system-upgrade
 spec:
-  concurrency: 2
+  concurrency: 1
   nodeSelector:
     matchExpressions:
-      - - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["debian"]}
-      - key: ""
-        operator: 
+      - {key: feature.node.kubernetes.io/system-os_release.ID, operator: In, values: ["debian"]}
   serviceAccountName: system-upgrade
   secrets:
     - name: bionic
       path: /host/run/system-upgrade/secrets/bionic
   drain:
     force: true
-  version: bionic
+  version: bullseye
   upgrade:
     image: debian
     command: ["chroot", "/host"]
