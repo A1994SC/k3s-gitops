@@ -1,0 +1,95 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: weaveworks-kured-charts
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://weaveworks.github.io/kured
+  timeout: 3m
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kured
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://weaveworks.github.io/kured
+      chart: kured
+      version: 2.13.0
+      sourceRef:
+        kind: HelmRepository
+        name: weaveworks-kured-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      # repository: weaveworks/kured
+      repository: raspbernetes/kured
+      tag: "1.9.2"
+      pullPolicy: IfNotPresent
+      pullSecrets: []
+
+    updateStrategy: RollingUpdate
+    #  requires RollingUpdate updateStrategy
+    maxUnavailable: 1
+
+    extraEnvVars:
+      - name: notifyUrl
+        valueFrom:
+          secretKeyRef:
+            name: kured-discord
+            key: url
+
+    configuration:
+      lockTtl: 0             
+      alertFilterRegexp: ""  
+      alertFiringOnly: false 
+      blockingPodSelector: []
+      endTime: "6:00"        
+      lockAnnotation: ""     
+      period: ""                 
+      forceReboot: false       
+      rebootDays: []           
+      rebootSentinel: ""       
+      rebootSentinelCommand: ""
+      rebootCommand: "/bin/systemctl reboot"  
+      messageTemplateDrain: "Draining node %s part of **Newport News**"
+      messageTemplateReboot: "Rebooting %s part of **Newport News**"  
+      startTime: "0:00"
+      timeZone: "America/New_York"
+      annotateNodes: false       
+      logFormat: "text"          
+
+    rbac:
+      create: true
+
+    serviceAccount:
+      create: true
+      name: kured
+
+    podSecurityPolicy:
+      create: false
+
+    containerSecurityContext:
+      privileged: true  # Give permission to nsenter /proc/1/ns/mnt
+    #  allowPrivilegeEscalation: true # Needed when using defaultAllowPrivilegedEscalation: false in psp
+
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "512Mi"
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    metrics:
+      create: false
+    service:
+      create: false
+    tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
