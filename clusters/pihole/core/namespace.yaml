@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: routes
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: system-upgrade
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager

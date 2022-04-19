@@ -1,0 +1,40 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: unbound
+  namespace: apps
+  labels:
+    app: unbound
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unbound
+  template:
+    metadata:
+      labels:
+        app: unbound
+    spec:
+      containers:
+      - name: unbound
+        image: mvance/unbound
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+        volumeMounts:
+        - name: config
+          mountPath: /opt/unbound/etc/unbound/
+      volumes:
+      - name: config
+        configMap:
+          name: unbound-conf
+#      nodeSelector:
+#        location.derpaholic.com: "newport_news"        
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unbound
+  namespace: apps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "10.2.1.6"
+  ports:
+    - protocol: TCP
+      name: dns
+      port: 5335      
+      targetPort: 5335
+  selector:
+    app: unbound
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unbound
+  namespace: apps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "10.2.1.6"
+  ports:
+    - protocol: UDP
+      name: dns
+      port: 5335      
+      targetPort: 5335
+  selector:
+    app: unbound
