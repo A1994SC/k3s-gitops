@@ -32,6 +32,13 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/unbound
+        ports:
+        - name: dns-u
+          containerPort: 5335
+          protocol: UDP
+        - name: dns-t
+          containerPort: 5335
+          protocol: TCP
       volumes:
       - name: config
         configMap:
