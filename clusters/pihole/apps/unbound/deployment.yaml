@@ -31,13 +31,13 @@ spec:
             memory: "32Mi"
         volumeMounts:
         - name: config
-          mountPath: /etc/unbound
+          mountPath: /opt/unbound/etc/unbound/
         ports:
         - name: dns-u
-          containerPort: 5335
+          containerPort: 53
           protocol: UDP
         - name: dns-t
-          containerPort: 5335
+          containerPort: 53
           protocol: TCP
       volumes:
       - name: config
