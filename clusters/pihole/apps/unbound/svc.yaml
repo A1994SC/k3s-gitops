@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: unbound
+  name: unbound-tcp
   namespace: apps
   annotations:
     metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: unbound
+  name: unbound-udp
   namespace: apps
   annotations:
     metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
