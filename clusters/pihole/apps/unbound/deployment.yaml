@@ -32,6 +32,10 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /opt/unbound/etc/unbound/
+        - name: dev
+          mountPath: /opt/unbound/etc/unbound/dev/
+        - name: var
+          mountPath: /opt/unbound/etc/unbound/var/
         ports:
         - name: dns-u
           containerPort: 53
@@ -43,6 +47,10 @@ spec:
       - name: config
         configMap:
           name: unbound-conf
+      - name: dev
+        emptyDir: {}
+      - name: var
+        emptyDir: {}
 #      nodeSelector:
 #        location.derpaholic.com: "newport_news"        
       dnsPolicy: ClusterFirst
