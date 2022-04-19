@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: unbound
-        image: mvance/unbound
+        image: klutchell/unbound
         imagePullPolicy: IfNotPresent
         resources:
           limits:
@@ -29,7 +29,7 @@ spec:
             memory: "32Mi"
         volumeMounts:
         - name: config
-          mountPath: /opt/unbound/etc/unbound/
+          mountPath: /etc/unbound
       volumes:
       - name: config
         configMap:
