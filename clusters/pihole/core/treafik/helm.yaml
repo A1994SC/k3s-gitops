@@ -78,9 +78,9 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
+      annotations:
+          metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
       spec:
         loadBalancerIP: "10.2.1.6"
-        annotations:
-          metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
     nodeSelector:
       node-role.kubernetes.io/master: "true"
