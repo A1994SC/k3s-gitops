@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pihole
+  namespace: apps
+data:
+  TZ: "America/New_York"
+  ADMIN_EMAIL: "allen@conlon.dev"
+  PIHOLE_DNS_: "1.1.1.1"
+  DNSSEC: "false"
+  TEMPERATUREUNIT: "f"
+  WEBUIBOXEDLAYOUT: "boxed"
+  WEBTHEME: "default-dark"
+  DNSMASQ_LISTENING: "all"
