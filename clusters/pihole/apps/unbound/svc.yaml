@@ -13,7 +13,7 @@ spec:
     - protocol: TCP
       name: dns
       port: 5335      
-      targetPort: 5335
+      targetPort: 53
   selector:
     app: unbound
 ---
@@ -31,6 +31,6 @@ spec:
     - protocol: UDP
       name: dns
       port: 5335      
-      targetPort: 5335
+      targetPort: 53
   selector:
     app: unbound
