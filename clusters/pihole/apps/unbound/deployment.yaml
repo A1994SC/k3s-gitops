@@ -6,6 +6,8 @@ metadata:
   namespace: apps
   labels:
     app: unbound
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
@@ -18,7 +20,7 @@ spec:
     spec:
       containers:
       - name: unbound
-        image: klutchell/unbound
+        image: mvance/unbound-rpi
         imagePullPolicy: IfNotPresent
         resources:
           limits:
