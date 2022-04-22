@@ -35,7 +35,7 @@ spec:
         allowExternalNameServices: true
     logs:
       general:
-        level: DEBUG
+        level: INFO
     metrics:
       # datadog:
       #   address: 127.0.0.1:8125
@@ -78,9 +78,7 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-      annotations:
-          metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
       spec:
-        loadBalancerIP: "10.2.1.6"
+        loadBalancerIP: "10.2.25.150"
     nodeSelector:
       node-role.kubernetes.io/master: "true"

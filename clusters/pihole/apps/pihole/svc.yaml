@@ -23,7 +23,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
 spec:
   type: LoadBalancer
-  loadBalancerIP: "10.2.1.6"
+  loadBalancerIP: "10.2.1.7"
   externalTrafficPolicy: Local
   selector:
     app: pihole
@@ -42,7 +42,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: "dns-shared-keys"
 spec:
   type: LoadBalancer
-  loadBalancerIP: "10.2.1.6"
+  loadBalancerIP: "10.2.1.7"
   externalTrafficPolicy: Local
   selector:
     app: pihole
