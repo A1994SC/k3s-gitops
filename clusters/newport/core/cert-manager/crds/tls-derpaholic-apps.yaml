@@ -11,10 +11,6 @@ spec:
   dnsNames:
   - derpaholic.com
   - "*.derpaholic.com"
-  - "*.kub.derpaholic.com"
-  - "*.nas.derpaholic.com"
-  - "*.net.derpaholic.com"
-  - "*.in.derpaholic.com"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
