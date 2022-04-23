@@ -4,14 +4,11 @@ kind: Ingress
 metadata:
   name: pihole
   namespace: apps
-#  annotations:
-#    # set ingress controller
-#    ingressClassName: "traefik"
-#    # default settings for traefik
-#    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd, routes-pihole-add@kubernetescrd"
-#    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-#    traefik.ingress.kubernetes.io/service.passhostheader: "true"
-#    traefik.ingress.kubernetes.io/router.tls: "true"
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
 #    # sticky session for traefik
 #    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
 #    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "cookies"
@@ -29,6 +26,7 @@ spec:
       name: pihole
       port:
         number: 80
+  ingressClassName: traefik
   rules:
   - http:
       paths:
