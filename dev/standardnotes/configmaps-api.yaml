@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sn-api-env
+  namespace: apps
+  labels:
+    group: standardnotes
+data:
+  SYNCING_SERVER_JS_URL: "http://sn-sync.apps.svc.cluster.local:3000"
+  AUTH_SERVER_URL: "http://sn-auth.apps.svc.cluster.local:3000"
+  HTTP_CALL_TIMEOUT: "10000"

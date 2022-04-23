@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sn-sync
+  namespace: apps
+  labels:
+    group: standardnotes
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 3000      
+      targetPort: 3000 # the port for the pod
+  selector:
+    app: sn-sync

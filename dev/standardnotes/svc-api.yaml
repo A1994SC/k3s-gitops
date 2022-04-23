@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sn-api
+  namespace: apps
+  labels:
+    group: standardnotes
+spec:
+  ports:
+    - protocol: TCP
+      name: api
+      port: 3000
+      targetPort: 3000 # the port for the pod
+    - protocol: TCP
+      name: web
+      port: 80
+      targetPort: 3000
+  selector:
+    app: sn-api

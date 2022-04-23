@@ -1,0 +1,70 @@
+---
+# Source: home-assistant/templates/common.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ha-home-assistant
+  labels:
+    helm.sh/chart: home-assistant-13.0.1
+    app.kubernetes.io/name: home-assistant
+    app.kubernetes.io/instance: ha
+    app.kubernetes.io/version: "2022.4.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: home-assistant
+      app.kubernetes.io/instance: ha
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: home-assistant
+        app.kubernetes.io/instance: ha
+    spec:
+
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: ha-home-assistant
+          image: "ghcr.io/home-assistant/home-assistant:2022.4.0"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: false
+          env:
+            - name: "TZ"
+              value: "UTC"
+          ports:
+            - name: http
+              containerPort: 8123
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 8123
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8123
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8123
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 250Gi
