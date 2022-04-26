@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: step-certificates
-      version: "0.18.2"
+      version: "1.18.2+20220324"
       sourceRef:
         kind: HelmRepository
         name: smallstep
