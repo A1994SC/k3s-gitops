@@ -5,14 +5,14 @@ metadata:
  name: step-issuer
 spec:
  # The CA URL.
- url: https://step-certificates.cert-manager.svc.cluster.local
+ url: https://step-certificates.small-steps.svc.cluster.local
  # The base64 encoded version of the CA root certificate in PEM format.
  caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ4RENDQVdtZ0F3SUJBZ0lRRERCTUpiWGtDbmNVN0lENU5vN2VJVEFLQmdncWhrak9QUVFEQWpCQU1Sb3cKR0FZRFZRUUtFeEZUZEdWd0lFTmxjblJwWm1sallYUmxjekVpTUNBR0ExVUVBeE1aVTNSbGNDQkRaWEowYVdacApZMkYwWlhNZ1VtOXZkQ0JEUVRBZUZ3MHlNakEwTWpZeE9EQTFOVEphRncwek1qQTBNak14T0RBMU5USmFNRUF4CkdqQVlCZ05WQkFvVEVWTjBaWEFnUTJWeWRHbG1hV05oZEdWek1TSXdJQVlEVlFRREV4bFRkR1Z3SUVObGNuUnAKWm1sallYUmxjeUJTYjI5MElFTkJNRmt3RXdZSEtvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVQWCtmSUdlOAp5VWgvTTFRRHY3aWdMTnpIQnFpZ1ovQkVpVGN6Z2hJVVNlOERWelkyRGNHaGNYcXJuUUtZK1NRbys2d3AxbXl3CmFkejhyQ1Z0RStGUjY2TkZNRU13RGdZRFZSMFBBUUgvQkFRREFnRUdNQklHQTFVZEV3RUIvd1FJTUFZQkFmOEMKQVFFd0hRWURWUjBPQkJZRUZOand3cjU4VkEzUlJtZXRTVjJNRkxFZGNEaWNNQW9HQ0NxR1NNNDlCQU1DQTBrQQpNRVlDSVFDWCtDaHdWOVRuQlhIeDl2TWxlM2N0c2JGSGNyUlE5TnFvc1N5b1g0WDIwd0loQUpaWTdMU0lCSDVxCmF1YXZybklMUW5McUVsNU41QWtRS0UrSXVib1RtTnJOCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
  # The provisioner name, kid, and a reference to the provisioner password secret.
  provisioner:
    name: admin
-   kid: 7nemEMfar6qVNtb7VWph3rdL_PU_Fwbchh1uum-Mjb4
+   kid: ejHfTsjkd_cGxZf1m0YQb55187MXDPm7jFbhhY38hIk
    passwordRef:
      name: step-certificates-provisioner-password
      key: password
-     namespace: cert-manager
+     namespace: small-steps
