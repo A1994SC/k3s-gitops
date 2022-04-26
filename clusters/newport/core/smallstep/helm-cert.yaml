@@ -14,7 +14,7 @@ spec:
         name: smallstep
         namespace: flux-system
   interval: 1m0s
-#  values:
+  values:
 #    # Default values for step-certificates.
 #
 #    # kind is the type of object to use when deploying the CA.
@@ -64,11 +64,11 @@ spec:
 #      secrets: true
 #
 #    # inject contains values to be injected into config maps and secrets
-#    inject:
-#      enabled: true
-#      config:
-#        files:
-#          ca.json:
+    inject:
+      enabled: true
+      config:
+        files:
+          ca.json:
 #            root: /home/step/certs/root_ca.crt
 #            federateRoots: []
 #            crt: /home/step/certs/intermediate_ca.crt
@@ -83,11 +83,11 @@ spec:
 #            db:
 #              type: badger
 #              dataSource: /home/step/db
-#            authority:
-#              claims:
+            authority:
+              claims:
 #                minTLSCertDuration: 5m
-#                maxTLSCertDuration: 24h
-#                defaultTLSCertDuration: 24h
+                maxTLSCertDuration: 336h
+                defaultTLSCertDuration: 336h
 #                disableRenewal: false
 #                minHostSSHCertDuration: 5m
 #                maxHostSSHCertDuration: 1680h

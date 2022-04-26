@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: step
+  namespace: apps
+spec:
+  secretName: tls-cert-step
+  privateKey:
+    rotationPolicy: Always
+  ipAddresses:
+    - 10.2.1.150
+  issuerRef:
+    name: step-issuer
+    kind: StepClusterIssuer
+    group: certmanager.step.sm
