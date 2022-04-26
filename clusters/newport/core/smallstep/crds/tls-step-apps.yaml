@@ -9,7 +9,8 @@ spec:
   privateKey:
     rotationPolicy: Always
   ipAddresses:
-    - 10.2.1.150
+    - 10.2.25.150
+    - 10.2.25.151
   issuerRef:
     name: step-issuer
     kind: StepClusterIssuer
