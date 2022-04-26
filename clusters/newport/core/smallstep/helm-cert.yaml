@@ -40,11 +40,11 @@ spec:
 #
 #    # Use existing secrets instead of 'bootstrap' init-container or 'inject'-element from helm chart
 #    # Note, the MutatingWebhookConfiguration created by autocert is not patched with CA bundle as the bootstrap init-container is not run
-#    existingSecrets:
-#      enabled: false
-#      ca: false
-#      issuer: false
-#      configAsSecret: false
+    existingSecrets:
+      enabled: true
+      ca: true
+      issuer: true
+      configAsSecret: true
 #      sshHostCa: false
 #      sshUserCa: false
 #
