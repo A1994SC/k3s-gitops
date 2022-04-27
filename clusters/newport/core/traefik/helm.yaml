@@ -39,7 +39,7 @@ spec:
     additionalArguments:
       - '--providers.file.filename=/config/dyn.yaml'
     volumes:
-      - name: tls-step
+      - name: tls-cert-step
         mountPath: '/certs'
         type: secret
       - name: traefik-config
