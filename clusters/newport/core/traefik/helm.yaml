@@ -17,7 +17,7 @@ spec:
   values:
     image:
       name: traefik # {"$imagepolicy": "flux-system:traefik:name"}
-      tag: "2.6.2" # {"$imagepolicy": "flux-system:traefik:tag"}
+      tag: "2.6.3" # {"$imagepolicy": "flux-system:traefik:tag"}
       pullPolicy: IfNotPresent
     deployment:
       enabled: true
@@ -36,6 +36,15 @@ spec:
     logs:
       general:
         level: INFO
+    additionalArguments:
+      - '--providers.file.filename=/config/dyn.yaml'
+    volumes:
+      - name: tls-step
+        mountPath: '/certs'
+        type: secret
+      - name: traefik-config
+        mountPath: '/config'
+        type: configMap
     metrics:
       # datadog:
       #   address: 127.0.0.1:8125
