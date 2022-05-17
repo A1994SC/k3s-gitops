@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: step-issuer
-      version: "0.6.3"
+      version: "0.6.4"
       sourceRef:
         kind: HelmRepository
         name: smallstep
@@ -19,7 +19,7 @@ spec:
 #    # This is a YAML-formatted file.
 #    # Declare variables to be passed into your templates.
 #
-    replicaCount: 5
+    replicaCount: 1
 #
 #    image:
 #      repository: cr.step.sm/smallstep/step-issuer
