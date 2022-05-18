@@ -14,7 +14,7 @@ data:
     no-autoupdate: true
     ingress:
     - hostname: "*.derpaholic.com"
-      service: https://traefik.ingress.svc.cluster.local:443
+      service: https://10.2.25.150:443
     - hostname: "*.conlon.dev"
-      service: https://traefik.ingress.svc.cluster.local:443
+      service: https://10.2.25.150:443
     - service: http_status:404
