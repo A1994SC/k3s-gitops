@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: step-issuer 
+  name: step-issuer
   namespace: small-steps
 spec:
   chart:
