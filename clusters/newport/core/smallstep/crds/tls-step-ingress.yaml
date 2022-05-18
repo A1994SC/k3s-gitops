@@ -12,6 +12,6 @@ spec:
     - 10.2.25.150
     - 10.2.25.151
   issuerRef:
-    name: step-issuer-2
+    name: step-issuer
     kind: StepClusterIssuer
     group: certmanager.step.sm
