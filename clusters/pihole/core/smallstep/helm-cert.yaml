@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: step-certificates 
+  namespace: small-steps
+spec:
+  chart:
+    spec:
+      chart: step-certificates
+      version: "1.18.2+20220324"
+      sourceRef:
+        kind: HelmRepository
+        name: smallstep
+        namespace: flux-system
+  interval: 5m0s
+  values:
+    # Default values for step-certificates.
+
+    # kind is the type of object to use when deploying the CA.
+    # Changing the deployment type is experimental.
+    kind: StatefulSet
+
+    # replicaCount is the number of replicas of step-certificates.
+    # Only one replica is supported at this time.
+    replicaCount: 1
+
+    # nameOverride overrides the name of the chart.
+    nameOverride: ""
+    # fullnameOverride overrides the full name of the chart.
+    fullnameOverride: ""
+
+    # image contains the docker image for step-certificates.
+    image:
+      repository: cr.step.sm/smallstep/step-ca
+      initContainerRepository: busybox:latest
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+
+    existingSecrets: 
+      enabled: true
+      ca: true
+      issuer: false
+      configAsSecret: true
+      sshHostCa: false
+      sshUserCa: false
+
+    bootstrap:
+      secrets: false
+      enabled: false
+      configmaps: false
+
+    inject:
+      enabled: false
+
+    # nodeSelector contains the node labels for pod assignment.
+    nodeSelector: {}
+
+    # tolerations contains the toleration labels for pod assignment.
+    tolerations: []
+
+    # affinity contains the affinity settings for pod assignment.
+    affinity: {}
