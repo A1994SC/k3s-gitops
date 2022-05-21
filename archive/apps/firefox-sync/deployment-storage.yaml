@@ -1,0 +1,48 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ff-sync-storage
+  namespace: apps
+  labels:
+    app: ff-sync-storage
+    groups: ff-sync
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ff-sync-storage
+  template:
+    metadata:
+      labels:
+        app: ff-sync-storage
+        group: ff-sync
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "kubernetes.io/arch"
+                operator: In
+                values: ["amd64"]
+      containers:
+      - name: storage
+        image: mozilla/syncstorage-rs:latest
+        envFrom:
+          - configMapRef:
+              name: ff-sync-storage-config
+          - secretRef:
+              name: ff-sync-storage-secret
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"  
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

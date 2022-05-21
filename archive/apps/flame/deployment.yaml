@@ -1,0 +1,61 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: flame
+  namespace: apps
+  labels:
+    app: flame-dash
+    groups: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flame-dash
+  template:
+    metadata:
+      labels:
+        app: flame-dash
+        group: dashboard
+    spec:
+      serviceAccountName: flame
+      securityContext:
+        fsGroup: 1000
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app: flame-dash
+      containers:
+      - name: flame
+        image: pawelmalak/flame:multiarch
+        imagePullPolicy: Always
+        env:
+        - name: PASSWORD_FILE
+          value: "/run/secrets/password"
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+          requests:
+            cpu: "25m"
+            memory: "32Mi"
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        ports:
+          - name: http
+            containerPort: 5005
+            protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: flame-pvc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

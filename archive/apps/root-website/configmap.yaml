@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: root-website-config
+  namespace: apps
+  labels:
+    group: root-web
+data:  
+  index.html: |
+    <html>
+      <head>
+        <title>Derpaholic</title>
+      </head>
+      <body>
+        <p style="text-align: center;">Allen S Conlon</p>
+        <hr />
+        <p>&nbsp;</p>
+      </body>
+    </html>

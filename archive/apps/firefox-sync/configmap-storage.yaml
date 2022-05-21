@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ff-sync-storage-config
+  namespace: apps
+  labels:
+    group: ff-sync
+data:  
+  SYNC_HOST: "0.0.0.0"
+  SYNC_TOKENSERVER__RUN_MIGRATIONS: "true"
+  RUST_LOG: "info"

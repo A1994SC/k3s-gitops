@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ff-sync-storage-svc
+  namespace: apps
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+      targetPort: 8000
+  selector:
+    app: ff-sync-storage

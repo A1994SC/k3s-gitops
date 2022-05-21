@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ff-sync
+  namespace: apps
+  annotations:
+    # set ingress controller
+    ingressClassName: "traefik"
+    # default settings for traefik
+    traefik.ingress.kubernetes.io/router.middlewares: "routes-default-header@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  labels:
+    group: ff-sync
+spec:
+  defaultBackend:
+    service:
+      name: ff-sync-storage-svc
+      port:
+        name: web
+  rules:
+  - host: sync.derpaholic.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ff-sync-storage-svc
+            port:
+              name: web
+        path: /
+        pathType: Prefix
+  tls:
+  - secretName: tls-cert-derpaholic-com
