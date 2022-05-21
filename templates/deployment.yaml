@@ -18,18 +18,24 @@ spec:
         app: some-app
         group: blah
     spec:
-#    affinity:
-#      nodeAffinity:
-#        requiredDuringSchedulingIgnoredDuringExecution:
-#          nodeSelectorTerms:
-#          - matchExpressions:
-#            - key: location.derpaholic.com
-#              operator: In
-#              values:
-#              - newport_news
+#      affinity:
+#        podAntiAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#          - topologyKey: kubernetes.io/hostname
+#            labelSelector:
+#              matchLabels:
+#                app: some-app
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: location.derpaholic.com
+#                operator: In
+#                values:
+#                - newport_news
       containers:
-      - name: some-pod
-        image: ckulka/baikal:nginx
+      - name: main
+        image: nginx
 #        command:
 #          -
 #        args:
