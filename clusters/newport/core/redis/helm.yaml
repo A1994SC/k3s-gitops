@@ -31,9 +31,7 @@ spec:
           cpu: 100m
         limits:
           memory: 256Mi
-    auth: true
-    authKey: "password"
-    existingSecret: "redis-password"
+    auth: false
     persistentVolume:
       size: "1Gi"
     additionalAffinities:
