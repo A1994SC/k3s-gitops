@@ -32,7 +32,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-api-gateway-server
-        image: standardnotes/api-gateway:1.35.0 # {"$imagepolicy": "flux-system:sn-api"}
+        image: standardnotes/api-gateway:1.38.0 # {"$imagepolicy": "flux-system:sn-api"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh

@@ -32,7 +32,7 @@ spec:
                 values: ["amd64"]
       containers:
       - name: sn-sync-server
-        image: standardnotes/syncing-server-js:1.51.0 # {"$imagepolicy": "flux-system:sn-sync"}
+        image: standardnotes/syncing-server-js:1.52.1 # {"$imagepolicy": "flux-system:sn-sync"}
         imagePullPolicy: Always
         command:
         - ./docker/entrypoint.sh

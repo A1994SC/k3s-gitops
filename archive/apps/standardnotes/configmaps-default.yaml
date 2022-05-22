@@ -21,7 +21,7 @@ data:
   DB_DEBUG_LEVEL: "warn" 
   # "all" | "query" | "schema" | "error" | "warn" | "info" | "log" | "migration"
   DB_MIGRATIONS_PATH: "dist/migrations/*.js"
-  # REDIS_URL: "redis://redis.redis.svc.cluster.local"
+  REDIS_URL: "redis://redis.redis.svc.cluster.local"
   # SNS_TOPIC_ARN: 
   # SNS_AWS_REGION: 
   # SQS_QUEUE_URL: 
