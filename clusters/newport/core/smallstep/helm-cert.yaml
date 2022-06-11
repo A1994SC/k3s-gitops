@@ -54,6 +54,11 @@ spec:
     inject:
       enabled: false
 
+  # added because it points to the mariadb database
+  ca:
+    db:
+      persistent: false
+
     # nodeSelector contains the node labels for pod assignment.
     nodeSelector: {}
 
