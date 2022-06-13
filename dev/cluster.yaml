@@ -1,0 +1,21 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name:  main
+  namespace: database
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 2Gi
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.3-2
+  logLevel: "info"
+  affinity:
+    enablePodAntiAffinity: true
+#  certificates:
+#    serverCASecret: ""
+#    serverTLSSecret: ""
+#    clientCASecret: ""
+#    serverAltDNSNames:
+#      - ""
