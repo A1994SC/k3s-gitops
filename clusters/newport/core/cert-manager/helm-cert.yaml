@@ -64,7 +64,7 @@ spec:
         node-role.kubernetes.io/master: "true"
       image:
         repository: quay.io/jetstack/cert-manager-webhook # {"$imagepolicy": "flux-system:cert-manager-webhook:name"}
-        tag: v1.8.0 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
+        tag: v1.8.1 # {"$imagepolicy": "flux-system:cert-manager-webhook:tag"}
         pullPolicy: Always
       serviceAccount:
         create: true
@@ -85,5 +85,5 @@ spec:
         node-role.kubernetes.io/master: "true"
       image:
         repository: quay.io/jetstack/cert-manager-cainjector # {"$imagepolicy": "flux-system:cert-manager-cainjector:name"}
-        tag: v1.8.0 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
+        tag: v1.8.1 # {"$imagepolicy": "flux-system:cert-manager-cainjector:tag"}
         pullPolicy: Always
