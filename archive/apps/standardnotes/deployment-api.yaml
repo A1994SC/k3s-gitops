@@ -8,6 +8,7 @@ metadata:
     app: sn-api
     group: standardnotes
     purpose: manager
+    sercurity.derpaholic.com: isolated
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
@@ -30,6 +31,17 @@ spec:
               - key: "kubernetes.io/arch"
                 operator: In
                 values: ["amd64"]
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                    - standardnotes
+              topologyKey: "kubernetes.io/hostname"
+            weight: 100
       containers:
       - name: sn-api-gateway-server
         image: standardnotes/api-gateway:1.38.0 # {"$imagepolicy": "flux-system:sn-api"}

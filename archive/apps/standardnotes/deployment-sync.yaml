@@ -8,6 +8,7 @@ metadata:
     app: sn-sync
     group: standardnotes
     purpose: manager
+    sercurity.derpaholic.com: isolated
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
@@ -21,6 +22,7 @@ spec:
         app: sn-sync
         group: standardnotes
         purpose: manager
+        sercurity.derpaholic.com: isolated
     spec:
       affinity:
         nodeAffinity:
@@ -30,6 +32,17 @@ spec:
               - key: "kubernetes.io/arch"
                 operator: In
                 values: ["amd64"]
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: group
+                  operator: In
+                  values:
+                    - standardnotes
+              topologyKey: "kubernetes.io/hostname"
+            weight: 100
       containers:
       - name: sn-sync-server
         image: standardnotes/syncing-server-js:1.52.1 # {"$imagepolicy": "flux-system:sn-sync"}

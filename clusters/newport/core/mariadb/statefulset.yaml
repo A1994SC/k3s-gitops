@@ -4,6 +4,8 @@ kind: StatefulSet
 metadata:
   name: mariadb
   namespace: database
+  annotations:
+    backup.velero.io/backup-volumes: data
 spec:
   selector:
     matchLabels:
@@ -15,6 +17,8 @@ spec:
     metadata:
       labels:
         app: maria
+      annotations:
+        backup.velero.io/backup-volumes: data
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -39,6 +43,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: data
+      labels:
+        app: maria
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "local-path"

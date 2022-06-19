@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: nginx-tls-wild
+    namespace: ingress
+type: kubernetes.io/tls
+stringData:
+    tls.crt: ENC[AES256_GCM,data:Ps77VU5Cf6Dhlayn7RN/be0za7fzuHZm8TE/+mimheD9y8lWZwOxWfDML4ilaMkIcPL+UovE6Lju6Lqu7HNg4EMXDnuFS6SqSkgWitMP11SH8NPt0N8srd1d5bPVTVvZCSvkakU+4ekJbWx9d1v+dNJHHrXMbTMjV/mpxmghAZu+EToD1l0tiLZAp7cDeE+IzYu1FwrV57sM0q45f+dPCxT68eniP2DjirFXkugaZcODS6c+wtNelQs2llljse5c0d+A5R08MmawTWqI6H4mJH34kFKGIPL4u8k6ve8psXDGFDZJnPryGlqAfmcTS2vq+VotGOjXYk3f+k6ESrlRCygD4YoD6EAABgW0qBp4abUL0lFkoH3MnM/l+FSli4JuXoWyZMpzXo1L4wYwRyYLf53W/R4hWjRlEQb9PgLzQjD3Lt+KIPtFKyY++bBoD+2VkvGnAYHS1U4kn/+MftHXpI79ma40HOV4La9k9VtiI3Ivw02Ha9SXr7FmskU5sZJCuVQh72EonLDKHGhp6iD0aKcKVnCN6Iis9YD1b7EMfgj/5+i4zaUVPOmmTWS/BkBHu3fploa8w7a6zE7QJIKOQ0JKCkIslCi5mD8vyCzBv6xwYXgSw1iErWaBO3HxFXD8vxEQeiHpHsTxVlkBdx3Omv+Vh5WoB/ooEFnccFRy+Bg41f7fA457oqE9GPXHb346n70PA09WVAa1B1Tfon/T4z1prixsBLQ1Ed7xLuR2g+4ngTILYsovt6ukAtDBkZdIy8zguaZJnA4DSCkafdz+8/gc1dBj2Y8bRBgRXG39N0W4Eccdc8Z7gvhWhOEJUKtiM5QbzwsI4/z0zLjZK1uONSpMTqX7W6gNS/pZag==,iv:kBkxqz5nQyAQM56cn7ph/mnkLs7lY3p8scxCIKiobHc=,tag:VicY5qKjPqg6h7nCXDzvjw==,type:str]
+    tls.key: ENC[AES256_GCM,data:titjpuy0wREnIxwbjjzO7RuoMEI8zHIXWSovyxwpv2fhhp9/mH+FKw6kWFsFSKyR523KIzxs3cxB86qy1LZ6rFQ22iI8hPczt5ogkXd8MH4r2+G4NEMUHlLtkCQoWesK6tXyscBioh89TgRYOtIFMEM9eBdPtZzpc9gq6hsHdYTJVaCAX+srCdpQEUTP673SFi6BjbgphgXusu2HNkgO0x/IV3kqfjZZR7Zkfwn5m+qg3HZCi7wYIhfstVHcXkioIjDU7giApa15VNv0vMcemi071dg683PveOyKtmiRwQs7ih5eh9gu5c4acnN7iBR418saKSuobf6ehiK7hdF9sMc/Z9oTvyRKDwxRp4eiDMDgsDEFEeKFpCFRT1AdcRdb0SvZIfEARByH+3f4WtjtWyYvHBv6n0FG5g==,iv:y2qe8LhDpdz8Gkyhy8iIuI1O3M1pe5cGvsV6vawf+SU=,tag:brfp+J+K1JnA5Q8828BrJA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1xqc2h0gazssmk3mchql6epwmkap7prv9nuknzprr9q2pzscprvfs995ukj
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqVGpmT3YyMzR4L21TQnV6
+            cjlueUxvclRNZHR0MHJjM1BHT3dMTkhDYzI4CnFoNm9VSzdTUWxBcHk0QTIvRmxl
+            TitJUDRiUkF0d2ZvZmRVUVhyVjFZNU0KLS0tIElJOTc1YXROMHZzcGxmZXRwOU5a
+            b0thM3BDd2o5azBsemRWMkF1NUxkRUkKKwUVCd4EUidd5ZzcEpIM8whdnvCbeXRv
+            toTcNuQaKNl330pnulHASQuXfJvjkIjWZAGo4g9WRWVRqNSB9J3YXA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-06-19T21:23:05Z"
+    mac: ENC[AES256_GCM,data:bPAJpkX2dX814hrwlUBi3DI0ekvlVc7QuZnHWAClH/GVzjsl9Tme8zJE5IrKVtfKjVORUgMQVYnljyOU5+/HWK66fbCJM4j9iQDyZhvcfv26oR/6tEVYlmc15EQcGHsvrn7gpw0Qcgsp7L1GCxJKTV1CoxmpOOkyWu4Xw6NUiL8=,iv:e8mf1CKZT/9YbudL0ftNgdKHWjic8cEezMzoMbgHJPA=,tag:Epz2+GLImvlKdOt2IYd05Q==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1

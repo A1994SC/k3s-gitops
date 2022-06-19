@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tunnel-credentials
+    namespace: ingress
+type: Opaque
+stringData:
+    credentials.json: ENC[AES256_GCM,data:4Cu1lm4qMdXgFreJGgEW9XcXq2/yV2jC70BKu0cIubXvkeqTJAW1LOgJCS6y5+V1ovkUrrPMnli3fJlf6zgNrhVzuUwg4qcYplTCx1zvxabDvCKju1xxy/+46VH8xfQmA313p8CKxOK0B1SE4HUaemoKZd8SSSSOaeoNdOlegNc6+PJft8/IlL6U+5gr1e3Xi+Fv7agu5L46xYp+3uZQtEw5Gk+nWFI1wTf1y5Vo97ngmMq+,iv:/yGi1Dow9Shb4U0VXv1Pj3pTkBXZg3LX9V48Yr/1OTU=,tag:olND5yBMdNUNyb08cYIrpA==,type:str]
+sops:
+    shamir_threshold: 2
+    key_groups:
+        - pgp:
+            - created_at: "2022-06-19T21:22:58Z"
+              enc: |
+                -----BEGIN PGP MESSAGE-----
+
+                hQIMAyV9b1w7rilCAQ/+M1X1f/1iWcMdvvMeGjxIUTSmQmuLU5ETk42ahr8gh3JN
+                XxQtXdfKkvUDiamhIq5aknuBmrbMwxgJJajM4/vvTJ5KROANFV/svXc3Ph9T8UHb
+                a+e1pBqsl+KP3hZ8h86bqihWU89Vk6l1gqULfb0LdMMkvwrh4SSN5+vLzg9Ss7ce
+                j9r8+Wlx0BeZ6wLqb+UlQx0vDufur2st8wozPzoBUYqTzmnIb7lLmhxJkrqYgBOT
+                vw1MWmVtBoEGRKU3gzb7KapfiasDIGqmbgB5Z7DEOxDzrIjOnRK20CE80hxNnWz+
+                XBeQKOygnKCE8gnAf9lXnx/v7DMrsiLscW8vIcPlhpnViN3ibgQu0iXlEzYZ8U2K
+                3v3w76e5dO8J0mlPEPIszrFJaiPHkJDVIMBILTbwikGbSrc/n6kJwS7F9RsNGEqy
+                oz8kMh79U3KsLC10EUHID/Sm4Dv2tDPcYPYcnD69CWQD2jnvXkrKzvd4c+bVnANW
+                KVJ9rnKI/+Wfge6b/425u3pT4aKVRGyg4jlUAj1GFkpq9DFnT2wHmqnRTReO+f4a
+                C8NMES0kAtVhDHPnOjyK2oVyFpr97sZ/1RFywvOymODuGoF1/I+TgPwiXHoeMgC8
+                Vy3xs55MLq2h7x203jXZ1DMr+BDjqloGnoVLjFgkieNRxWrTRcZREj7aYAhdB37S
+                XwHFmx4qxucdfO1NZshNK05AwdNZWuGlxmEyfiaIp2GDKst52JMOso0zcjLzkh+a
+                qaT0YOqpnR7qSPzjk3YymnACxc8843SNJXTS0wPiEjX2FO/wx+q2qBqqcQQ6NTiL
+                =aMGF
+                -----END PGP MESSAGE-----
+              fp: 9B943C63F470C6AEF51D02E51966026E6BC4FA59
+          hc_vault: []
+          age: []
+        - hc_vault: []
+          age:
+            - recipient: age1xqc2h0gazssmk3mchql6epwmkap7prv9nuknzprr9q2pzscprvfs995ukj
+              enc: |
+                -----BEGIN AGE ENCRYPTED FILE-----
+                YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBlNnk5UXZTYjAxaSsyNHN5
+                bEdHcmZXcE83eU5lUlhTNzNxL1k3T2RQQW5ZCnBvbXVyUWVqNHhsaFlONmRvSWl5
+                cE9HcGdWSks3T21rcFFEcDdKTW1PSjAKLS0tIEhIbFNKem8wMWNYZzVxWDNDRE41
+                M0xRa3pkWlFtZGtydEVOdnZVYTJOMFUKuWFwJ/nQjjVxguB3o0R4eJX/Pyu9GTR8
+                UCBNpKNZ3YNOoqa38MjlcaC/hmPEc/OaB/6culd08KE+xexZT3zrFNI=
+                -----END AGE ENCRYPTED FILE-----
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2022-06-19T21:22:59Z"
+    mac: ENC[AES256_GCM,data:rV6pm4dsqfx5b5Dp7LIK3UovP3Lo3ZuHGh/i4GLf1UJbh+Ww3b0/Bi/U5d0MZXLI6ndNkmaDIV1/La2AhIkGmDBt0taU8CP62yM/Bvnq6QjXwtcdSv/s5/zZlGE+GBtAUmbrEmo9XmBZa6dZE2txZtcvhJKWsc8Gb1YZVfa8VEg=,iv:YduGkJpK9PwrZ95CGI/YqRld8isGaqb0FzDER/7dFzM=,tag:3Ehop0rupWSj9ATDpYJayA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1

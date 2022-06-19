@@ -19,7 +19,6 @@ spec:
   policy:
     semver:
       range: 1.x
-
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
@@ -41,7 +40,6 @@ spec:
   policy:
     semver:
       range: 1.x
-
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
