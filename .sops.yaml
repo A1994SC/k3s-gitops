@@ -1,5 +1,6 @@
 keys:
   - &master   age1xqc2h0gazssmk3mchql6epwmkap7prv9nuknzprr9q2pzscprvfs995ukj
+  - &allen    71DADA7922B3E08101B3341369C476704F97DBDA
   - &newport  9B943C63F470C6AEF51D02E51966026E6BC4FA59
   - &pihole   420FED6724AD4C46AAB9BC68F76AA09BCDF99CA2
 creation_rules:
@@ -8,15 +9,13 @@ creation_rules:
     key_groups:
       - pgp: 
         - *newport
-      - age:
-        - *master
+        - *allen
   - path_regex: clusters/pihole/.*.enc.yaml
     encrypted_regex: ^(data|stringData)$
     key_groups:
       - pgp: 
         - *pihole
-      - age:
-        - *master
+        - *allen
   - path_regex: archive/.*.enc.yaml
     encrypted_regex: ^(data|stringData)$
     key_groups:
