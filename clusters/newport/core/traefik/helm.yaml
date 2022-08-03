@@ -22,7 +22,7 @@ spec:
     deployment:
       enabled: true
       kind: Deployment
-      replicas: 1
+      replicas: 3
       terminationGracePeriodSeconds: 60
       labels:
         app: traefik
@@ -89,5 +89,15 @@ spec:
       type: LoadBalancer
       spec:
         loadBalancerIP: "10.2.25.150"
-    nodeSelector:
-      node-role.kubernetes.io/master: "true"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: group
+                operator: In
+                values:
+                  - standardnotes
+            topologyKey: "kubernetes.io/hostname"
+          weight: 100
